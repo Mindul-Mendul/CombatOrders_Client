@@ -5,21 +5,31 @@ using UnityEngine;
 public class PlayerItem : MonoBehaviour
 {
     bool isShop;
+    bool enableShopPanel;
+    GameObject shopPanel;
     void Awake()
     {
         isShop = false;
+        enableShopPanel = false;
+        shopPanel = GameObject.Find("Panel");
+        shopPanel.SetActive(false);
     }
 
     private void Update()
     {
         if (isShop)
         {
-            //Debug.Log("You can use the Shop");
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                enableShopPanel = !enableShopPanel;
+            }
         }
         else
         {
-            //Debug.Log("You cannot use the Shop");
+            enableShopPanel = false;
         }
+
+        shopPanel.SetActive(enableShopPanel);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

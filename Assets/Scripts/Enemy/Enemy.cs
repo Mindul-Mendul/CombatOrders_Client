@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
         Vector3 _HPbarPos =
             Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + HPHeight, 0));
         MaxHPbar.position = _HPbarPos;
+        MaxHPbar.transform.SetAsFirstSibling();
         HPbar.fillAmount = (float)HP / (float)MaxHP;
     }
 

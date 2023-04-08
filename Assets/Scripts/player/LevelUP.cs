@@ -12,7 +12,7 @@ public class LevelUP : MonoBehaviour
     private void Awake()
     {
         ps = GetComponent<ParticleSystem>();
-        p = gameObject.transform.parent.GetComponent<PlayerState>();
+        p = transform.parent.GetComponent<PlayerState>();
         ps.Stop();
     }
 

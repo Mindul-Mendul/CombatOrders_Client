@@ -12,7 +12,6 @@ public class PlayerSkill : MonoBehaviour
     Skill W;
     Skill E;
     Skill R;
-    // Start is called before the first frame update
     void Awake()
     {
         state = GetComponent<PlayerState>();
@@ -23,7 +22,6 @@ public class PlayerSkill : MonoBehaviour
         R = job.R;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))

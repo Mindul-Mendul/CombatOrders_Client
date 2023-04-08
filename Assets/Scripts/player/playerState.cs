@@ -44,11 +44,11 @@ public class PlayerState : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        prfHPbar = GameObject.Find("HPbar_bg");
+        prfHPbar = transform.GetChild(0).gameObject;
         canvas = GameObject.Find("Canvas");
         MaxHPbar = Instantiate(prfHPbar, canvas.transform).GetComponent<RectTransform>();
         HPbar = MaxHPbar.transform.GetChild(0).GetComponent<Image>();
-        LevelUP = gameObject.transform.GetChild(2).GetComponent<LevelUP>();
+        LevelUP = transform.GetChild(2).GetComponent<LevelUP>();
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
 
@@ -68,9 +68,9 @@ public class PlayerState : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 _HPbarPos =
-            Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y+HPHeight, 0));
+        Vector3 _HPbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y+HPHeight, 10));
         MaxHPbar.position = _HPbarPos;
+        MaxHPbar.transform.SetAsFirstSibling();
         HPbar.fillAmount = (float)hp / (float)maxHP;
     }
 

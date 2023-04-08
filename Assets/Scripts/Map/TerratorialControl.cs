@@ -9,13 +9,13 @@ public class TerratorialControl : MonoBehaviour
     Collider2D Collider;
 
     bool isShovingMatch; // 대치상황 체크
-    float ActivationPoint;
+    public float ActivationPoint;
     
     int redPeople;
     int bluePeople;
 
     float ControlWeight = 1.62f; // 밸런스 조정을 위한 수치
-    float ActivationWeight = 0.48f; // 밸런스 조정을 위한 수치
+    float ActivationWeight = 10.0f; // 밸런스 조정을 위한 수치
 
     void Awake()
     {
@@ -91,6 +91,11 @@ public class TerratorialControl : MonoBehaviour
             {
                 ActivationPoint -= (float)bluePeople * ActivationWeight * Time.deltaTime;
             }
+
+            if(ActivationPoint < -100.0f)
+            {
+                ActivationPoint = -100.0f;
+            }
         }
 
         // 레드가 점령 중인 상황
@@ -99,6 +104,11 @@ public class TerratorialControl : MonoBehaviour
             if (redPeople > 0 && ActivationPoint < 100.0f)
             {
                 ActivationPoint += (float)redPeople * ActivationWeight * Time.deltaTime;
+            }
+
+            if (ActivationPoint > 100.0f)
+            {
+                ActivationPoint = 100.0f;
             }
         }
     }
