@@ -1,16 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour
 {
-    GameObject canvas; 
-    GameObject prfHPbar;
-    LevelUP LevelUP;
-    public float HPHeight;
-    RectTransform MaxHPbar;
-    Image HPbar;
+    PlayerLevel playerLevel;
     SpriteRenderer spriteRenderer;
-    Animator anim;
 
     Job job;
     private int level = 1;
@@ -38,17 +31,11 @@ public class PlayerState : MonoBehaviour
     public float MovSpd { get => movSpd; set => movSpd = value; }
     public Item[] Backpack { get => backpack ; set => backpack = value; }
 
-    
-
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
-        prfHPbar = transform.GetChild(0).gameObject;
-        canvas = GameObject.Find("Canvas");
-        MaxHPbar = Instantiate(prfHPbar, canvas.transform).GetComponent<RectTransform>();
-        HPbar = MaxHPbar.transform.GetChild(0).GetComponent<Image>();
-        LevelUP = transform.GetChild(2).GetComponent<LevelUP>();
+
+        playerLevel = GetComponent<PlayerLevel>();
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
 
@@ -61,30 +48,27 @@ public class PlayerState : MonoBehaviour
         }
 
         //Level up
-        LevelUP.Levelup();
+        playerLevel.Levelup();
 
         //Debug.Log("Level:" + level + " / EXP: " + expPoint);
     }
 
     void FixedUpdate()
     {
-        Vector3 _HPbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y+HPHeight, 10));
-        MaxHPbar.position = _HPbarPos;
-        MaxHPbar.transform.SetAsFirstSibling();
-        HPbar.fillAmount = (float)hp / (float)maxHP;
+        
     }
 
     public void SetAnimBool(string name, bool value)
     {
-        anim.SetBool(name, value);
+        GetComponent<Animator>().SetBool(name, value);
     }
 
     public bool GetAnimBool(string name)
     {
-        return anim.GetBool(name);
+        return GetComponent<Animator>().GetBool(name);
     }
 
-    public void OnDamaged(Vector2 targetPos)
+    public void OnDamaged()
     {
         //Change Layer (Immortal Active)
         gameObject.layer = 7;
@@ -97,7 +81,7 @@ public class PlayerState : MonoBehaviour
         Invoke("OffDamaged", 2);
 
         //Animation
-        anim.SetTrigger("doDamaged");
+        GetComponent<Animator>().SetTrigger("doDamaged");
     }
 
     public void OffDamaged()

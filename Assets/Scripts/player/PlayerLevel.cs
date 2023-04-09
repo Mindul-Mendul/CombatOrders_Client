@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelUP : MonoBehaviour
+public class PlayerLevel : MonoBehaviour
 {
-    private ParticleSystem ps;
-    PlayerState p;
+    public ParticleSystem ps;
+    PlayerState playerState;
 
     readonly int[] levelupTable = new int[] { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120 };
+    public int[] LevelupTable { get => levelupTable; }
 
     private void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
-        p = transform.parent.GetComponent<PlayerState>();
+        playerState = transform.GetComponent<PlayerState>();
         ps.Stop();
     }
 
     public void Levelup()
     {
         //Level up
-        while (p.Level < 13 && p.EXPPoint >= levelupTable[p.Level])
+        while (playerState.Level < 13 && playerState.EXPPoint >= levelupTable[playerState.Level])
         {
-            p.EXPPoint -= levelupTable[p.Level++];
+            playerState.EXPPoint -= levelupTable[playerState.Level++];
             Play();
         }
-        if (p.Level == 13)
+        if (playerState.Level == 13)
         {
-            p.EXPPoint = 0;
+            playerState.EXPPoint = 0;
         }
     }
 

@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+    Transform playerTransform;
     // Start is called before the first frame update
     void Awake()
     {
-        
+        playerTransform = transform.parent;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y+2.3f, -1);
+        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y+2.3f, -1);
     }
 }
