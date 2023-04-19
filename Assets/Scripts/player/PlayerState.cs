@@ -15,7 +15,7 @@ public class PlayerState : MonoBehaviour
     private int hp = 100;
     private float attSpd = 1;
     private float movSpd = 4;
-    private float HPRecoverTerm = 2f;
+    private float HPRecoverTerm = 10f;
     private int hpRecovery = 5;
     public Item[] backpack;
 
@@ -49,8 +49,6 @@ public class PlayerState : MonoBehaviour
 
         //Level up
         playerLevel.Levelup();
-
-        //Debug.Log("Level:" + level + " / EXP: " + expPoint);
     }
 
     void FixedUpdate()
@@ -78,7 +76,7 @@ public class PlayerState : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
 
         //Reaction Force
-        Invoke("OffDamaged", 2);
+        Invoke(nameof(OffDamaged), 2);
 
         //Animation
         GetComponent<Animator>().SetTrigger("doDamaged");

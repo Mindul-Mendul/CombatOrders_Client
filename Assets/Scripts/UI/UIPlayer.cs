@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UI;
 
-public class PlayerUI : MonoBehaviour
+public class UIPlayer : MonoBehaviour
 {
     GameObject Canvas;
     GameObject Profile;
     PlayerLevel playerLevel;
     PlayerState playerState;
 
-    public float HPHeight;
+    readonly float HPHeight = 1.0f;
     
     GameObject prfHPbar;
     RectTransform MaxHPbar;
@@ -19,6 +20,11 @@ public class PlayerUI : MonoBehaviour
 
     GameObject MaxEXPbar;
     Image EXPbar;
+
+    public TextMeshProUGUI textLevel;
+    public TextMeshProUGUI textAttack;
+    public TextMeshProUGUI textDefense;
+    public TextMeshProUGUI textSpeed;
 
     void Awake()
     {
@@ -34,6 +40,8 @@ public class PlayerUI : MonoBehaviour
 
         MaxEXPbar = Profile.transform.Find("PlayerUI/EXPbar_bg").gameObject;
         EXPbar = MaxEXPbar.transform.Find("EXPbar").GetComponent<Image>();
+
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -44,5 +52,15 @@ public class PlayerUI : MonoBehaviour
         MaxHPbar.transform.SetAsFirstSibling();
         HPbar.fillAmount = (float)playerState.HP / playerState.MaxHP;
         EXPbar.fillAmount = (float)playerState.EXPPoint / playerLevel.LevelupTable[playerState.Level];
+
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
+        textLevel.text = playerState.Level.ToString();
+        textAttack.text = playerState.Att.ToString();
+        textDefense.text = playerState.Def.ToString();
+        textSpeed.text = playerState.MovSpd.ToString();
     }
 }
