@@ -14,7 +14,7 @@ public class Skill : MonoBehaviour
     public float cooltime;
     public bool isCooling;
 
-    public void useSkill()
+    public void UseSkill()
     {
         StartCoroutine(SetCooltime(cooltime));
     }

@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    PlayerLevel playerLevel;
     SpriteRenderer spriteRenderer;
+    
+    PlayerLevel playerLevel;
+    PlayerJob playerJob;
 
-    Job job;
     private int level = 1;
     private int expPoint = 0;
     private int team = 1;
@@ -15,11 +16,11 @@ public class PlayerState : MonoBehaviour
     private int hp = 100;
     private float attSpd = 1;
     private float movSpd = 4;
+
     private float HPRecoverTerm = 10f;
     private int hpRecovery = 5;
     public Item[] backpack;
 
-    public Job Job { get => job; set => job = value; }
     public int Level { get => level; set => level = value; }
     public int EXPPoint { get => expPoint; set => expPoint = value; }
     public int Team { get => team; set => team = value; }
@@ -36,6 +37,8 @@ public class PlayerState : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         playerLevel = GetComponent<PlayerLevel>();
+        playerJob = GetComponent<PlayerJob>();
+
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
 
@@ -96,4 +99,3 @@ public class PlayerState : MonoBehaviour
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
 }
-

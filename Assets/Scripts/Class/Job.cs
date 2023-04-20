@@ -1,13 +1,13 @@
-using UnityEditor.Experimental.GraphView;
+﻿using UnityEditor;
 using UnityEngine;
 
-public class Job : MonoBehaviour
+public class Job
 {
     public int Att;
     public int Def;
     public int MaxHP;
-    public float MovSpd;
-    public float AttSpd;
+    public int MovSpd;
+    public int AttSpd;
 
     public Skill Q;
     public Skill W;

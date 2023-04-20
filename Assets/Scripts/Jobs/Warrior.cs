@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Warrior : Job
+public class Warrior: Job
 {
     public Warrior()
     {
@@ -12,21 +13,24 @@ public class Warrior : Job
         MaxHP = 1;
         MovSpd = 1;
         AttSpd = 1;
-        Q = this.gameObject.AddComponent<Skill_WarriorQ>();
-        W = this.gameObject.AddComponent<Skill_WarriorW>();
-        E = this.gameObject.AddComponent<Skill_WarriorE>();
-        R = this.gameObject.AddComponent<Skill_WarriorR>();
+
+        SkillQ_Warrior skillQ_Warrior = new();
+        SkillW_Warrior skillW_Warrior = new();
+        SkillE_Warrior skillE_Warrior = new();
+        SkillR_Warrior skillR_Warrior = new();
+        Q = skillQ_Warrior;
+        W = skillW_Warrior;
+        E = skillE_Warrior;
+        R = skillR_Warrior;
     }
 
-
-    public class Skill_WarriorQ : Skill
+    class SkillQ_Warrior : Skill
     {
-        GameObject WarriorQ;
-        public Skill_WarriorQ()
+        public SkillQ_Warrior()
         {
-            //spriteRenderer = ;
-            //spriteMask = 1;
-            //img_Skill = 1;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteMask = GetComponent<SpriteMask>();
+            img_Skill = GetComponent<Image>();
             level = 1;
             maxStack = 1;
             stackCount = maxStack;
@@ -35,14 +39,13 @@ public class Warrior : Job
             isCooling = false;
         }
     }
-    public class Skill_WarriorW : Skill
+    class SkillW_Warrior : Skill
     {
-        GameObject WarriorQ;
-        public Skill_WarriorW()
+        public SkillW_Warrior()
         {
-            //spriteRenderer = ;
-            //spriteMask = 1;
-            //img_Skill = 1;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteMask = GetComponent<SpriteMask>();
+            img_Skill = GetComponent<Image>();
             level = 1;
             maxStack = 1;
             stackCount = maxStack;
@@ -51,14 +54,13 @@ public class Warrior : Job
             isCooling = false;
         }
     }
-    public class Skill_WarriorE : Skill
+    class SkillE_Warrior : Skill
     {
-        GameObject WarriorQ;
-        public Skill_WarriorE()
+        public SkillE_Warrior()
         {
-            //spriteRenderer = ;
-            //spriteMask = 1;
-            //img_Skill = 1;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteMask = GetComponent<SpriteMask>();
+            img_Skill = GetComponent<Image>();
             level = 1;
             maxStack = 1;
             stackCount = maxStack;
@@ -67,14 +69,13 @@ public class Warrior : Job
             isCooling = false;
         }
     }
-    public class Skill_WarriorR : Skill
+    class SkillR_Warrior : Skill
     {
-        GameObject WarriorQ;
-        public Skill_WarriorR()
+        public SkillR_Warrior()
         {
-            //spriteRenderer = ;
-            //spriteMask = 1;
-            //img_Skill = 1;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteMask = GetComponent<SpriteMask>();
+            img_Skill = GetComponent<Image>();
             level = 1;
             maxStack = 1;
             stackCount = maxStack;
