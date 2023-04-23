@@ -23,9 +23,11 @@ public class UIPlayer : MonoBehaviour
     Image EXPbar;
 
     public TextMeshProUGUI textLevel;
-    public TextMeshProUGUI textAttack;
-    public TextMeshProUGUI textDefense;
-    public TextMeshProUGUI textSpeed;
+    public TextMeshProUGUI textAtt;
+    public TextMeshProUGUI textDef;
+    public TextMeshProUGUI textMovSpd;
+    public TextMeshProUGUI textAttSpd;
+    public TextMeshProUGUI textMoney;
 
     void Awake()
     {
@@ -60,8 +62,10 @@ public class UIPlayer : MonoBehaviour
     void UpdateText()
     {
         textLevel.text = playerState.Level.ToString();
-        textAttack.text = playerState.Att.ToString();
-        textDefense.text = playerState.Def.ToString();
-        textSpeed.text = playerState.MovSpd.ToString();
+        textAtt.text = playerState.Att.ToString();
+        textDef.text = playerState.Def.ToString();
+        textMovSpd.text = playerState.MovSpd.ToString();
+        textAttSpd.text = playerState.AttSpd.ToString();
+        textMoney.text = playerState.Money.ToString();
     }
 }

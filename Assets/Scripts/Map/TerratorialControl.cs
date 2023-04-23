@@ -14,7 +14,6 @@ public class TerratorialControl : MonoBehaviour
     int redPeople;
     int bluePeople;
 
-    float ControlWeight = 1.62f; // 밸런스 조정을 위한 수치
     float ActivationWeight = 10.0f; // 밸런스 조정을 위한 수치
 
     void Awake()
@@ -28,22 +27,14 @@ public class TerratorialControl : MonoBehaviour
     }
 
     private void Update()
-    { 
-        //AP 계산
-        CalculateActivationPoint();
-
-        //CP 계산
-        //대치상황이 아닐 때만 계산
-        
-
+    {
         redPeople = 0;
         bluePeople = 0;
-        // PlayerState asdf = collision.gameObject.GetComponent<PlayerState>();
+
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, Collider.bounds.size, 0f);
 
         foreach (Collider2D collider in colliders)
         {
-
             if (collider.CompareTag("Player"))
             {
                 int team = collider.GetComponent<PlayerState>().Team;
@@ -58,28 +49,12 @@ public class TerratorialControl : MonoBehaviour
             }
         }
 
-        if (!isShovingMatch)
-        {
-            CalculateControlPoint();
-        }
-        //Debug.Log(Terratory + " red Character Count: " + redPeople + "/ blue Character Count: " + bluePeople);
+        isShovingMatch = (redPeople * bluePeople > 0);
+        CalculateActivationPoint();
     }
 
     // 점령 포인트 계산을 위한 메소드
-    void CalculateControlPoint()
-    {
-        //레드가 점령한 상황
-        if (ActivationPoint >= 100.0f)
-        {
-            StageManager.CPRed += (float)redPeople * ControlWeight * Time.deltaTime;
-        }
-
-        //블루가 점령한 상황
-        else if (ActivationPoint <= -100.0f)
-        {
-            StageManager.CPBlue += (float)bluePeople * ControlWeight * Time.deltaTime;
-        }
-    }
+    
 
     // 활성화 포인트 계산을 위한 메소드
     void CalculateActivationPoint()
