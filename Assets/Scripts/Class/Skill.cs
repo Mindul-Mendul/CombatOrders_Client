@@ -1,36 +1,39 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Skill : MonoBehaviour
 {
-    public SpriteRenderer spriteRenderer;
-    public SpriteMask spriteMask;
-    public Image img_Skill;
-    public int level;
-    public int maxStack;
-    public int stackCount;
-    public float damage;
-    public float cooltime;
-    public bool isCooling;
+    SpriteRenderer spriteRenderer;
+    SpriteMask spriteMask;
+    public int damage;
 
-    public void UseSkill()
+    public float attackDuration; // 공격 지속 시간
+    public float attackDelay; // 공격 딜레이 시간
+
+    void Awake()
     {
-        StartCoroutine(SetCooltime(cooltime));
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteMask = GetComponent<SpriteMask>();
     }
 
-    IEnumerator SetCooltime(float cooltime)
+    // Update is called once per frame
+    public IEnumerator UseSkill(GameObject player)
     {
-        isCooling = true;
-        float maxCool = cooltime;
+        // 딜레이
+        yield return new WaitForSeconds(attackDuration);
 
-        while (cooltime > 0f)
-        {
-            cooltime -= Time.deltaTime;
-            img_Skill.fillAmount = (maxCool - cooltime) / maxCool;
-            yield return new WaitForFixedUpdate();
-        }
+        // 공격 판정 박스 생성
+        bool flipX = player.GetComponent<SpriteRenderer>().flipX;
+        Vector3 _pos = player.transform.position;
 
-        isCooling = false;
+        spriteRenderer.flipX = flipX;
+        gameObject.transform.position = _pos + (flipX == true ? -1 : 1) * gameObject.transform.position;
+
+        // 지속 시간
+        yield return new WaitForSeconds(attackDelay);
+
+        // 공격 판정 박스 제거
+        Destroy(gameObject);
     }
 }

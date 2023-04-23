@@ -16,8 +16,8 @@ public class PlayerState : MonoBehaviour
     private int hp = 100;
     private float attSpd = 1;
     private float movSpd = 4;
-
-    private float HPRecoverTerm = 10f;
+    private int money = 0;
+    private float hpRecoverTerm = 10f;
     private int hpRecovery = 5;
     public Item[] backpack;
 
@@ -30,7 +30,10 @@ public class PlayerState : MonoBehaviour
     public int HP { get => hp; set => hp = value; }
     public float AttSpd { get => attSpd; set => attSpd = value; }
     public float MovSpd { get => movSpd; set => movSpd = value; }
+    private float HPRecoverTerm { get => hpRecoverTerm; set => hpRecoverTerm = value; }
+    private int HPRecovery { get => hpRecovery; set => hpRecovery = value; }
     public Item[] Backpack { get => backpack ; set => backpack = value; }
+    public int Money { get => money; set => money = value; }
 
     void Awake()
     {

@@ -181,7 +181,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 85
         width: 16
         height: 16
       alignment: 0
@@ -205,8 +205,8 @@ TextureImporter:
       name: Single
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
+        x: 17
+        y: 85
         width: 16
         height: 16
       alignment: 0
@@ -230,8 +230,8 @@ TextureImporter:
       name: Single Right
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
+        x: 34
+        y: 85
         width: 16
         height: 16
       alignment: 0
@@ -255,8 +255,8 @@ TextureImporter:
       name: Top Left
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
+        x: 0
+        y: 68
         width: 16
         height: 16
       alignment: 0
@@ -280,8 +280,8 @@ TextureImporter:
       name: Top
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 17
+        y: 68
         width: 16
         height: 16
       alignment: 0
@@ -305,8 +305,8 @@ TextureImporter:
       name: Top Right
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 34
+        y: 68
         width: 16
         height: 16
       alignment: 0
@@ -330,8 +330,8 @@ TextureImporter:
       name: Middle Left
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 0
+        y: 51
         width: 16
         height: 16
       alignment: 0
@@ -355,8 +355,8 @@ TextureImporter:
       name: Middle
       rect:
         serializedVersion: 2
-        x: 48
-        y: 32
+        x: 17
+        y: 51
         width: 16
         height: 16
       alignment: 0
@@ -380,8 +380,8 @@ TextureImporter:
       name: Middle Right
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 34
+        y: 51
         width: 16
         height: 16
       alignment: 0
@@ -405,8 +405,8 @@ TextureImporter:
       name: Bottom Left
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 0
+        y: 34
         width: 16
         height: 16
       alignment: 0
@@ -430,8 +430,8 @@ TextureImporter:
       name: Bottom
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 17
+        y: 34
         width: 16
         height: 16
       alignment: 0
@@ -455,8 +455,8 @@ TextureImporter:
       name: Bottom Right
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
+        x: 34
+        y: 34
         width: 16
         height: 16
       alignment: 0
@@ -481,7 +481,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 17
         width: 16
         height: 16
       alignment: 0
@@ -504,8 +504,8 @@ TextureImporter:
       name: Slope Right
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 17
+        y: 17
         width: 16
         height: 16
       alignment: 0
@@ -528,8 +528,8 @@ TextureImporter:
       name: Slope Under Left
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 34
+        y: 17
         width: 16
         height: 16
       alignment: 0
@@ -553,7 +553,7 @@ TextureImporter:
       name: Slope Under Right
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -585,22 +585,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Slope Under Left: 5238178756103069120
       Bottom: 8284008178146917663
-      Middle: -2658475963797995646
       Bottom Left: -7516653739194389164
+      Bottom Right: 9148909279685094865
+      Middle: -2658475963797995646
+      Middle Left: -8555344763861739660
+      Middle Right: -2906028173944417041
+      Single: -2784247815669728694
+      Single Left: 8506730005712635708
+      Single Right: 1982798753367972342
       Slope Left: 6576202649694883678
       Slope Right: -1808344714089705743
-      Single Right: 1982798753367972342
-      Single: -2784247815669728694
-      Middle Left: -8555344763861739660
-      Bottom Right: 9148909279685094865
-      Top Right: 8598293912659149021
-      Top: 4294643669078967044
-      Middle Right: -2906028173944417041
+      Slope Under Left: 5238178756103069120
       Slope Under Right: 9202526412431455181
-      Single Left: 8506730005712635708
+      Top: 4294643669078967044
       Top Left: -5365963968028550086
+      Top Right: 8598293912659149021
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

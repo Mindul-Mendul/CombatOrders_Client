@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Skill"))
         {
-            OnDamaged(other.gameObject.GetComponent<SkillAttack>().damage, GameObject.Find("Player"));
+            OnDamaged(other.gameObject.GetComponent<Skill>().damage, GameObject.Find("Player"));
         }
     }
 

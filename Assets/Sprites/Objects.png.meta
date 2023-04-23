@@ -190,8 +190,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spike: 7145198348311737387
       Finish: -3708508325519384304
+      Spike: 7145198348311737387
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -25,8 +25,8 @@ public class SpwanController: MonoBehaviour
         {
             if (spawnPointStates[spawnPoint])
             {
-                GameObject enemy = Instantiate(spawnPoint.enemyPrefab, spawnPoint.transform.position, Quaternion.identity);
-                enemy.transform.GetChild(0).GetComponent<Enemy>().OnDeath += () => OnEnemyDeath(spawnPoint);
+                GameObject enemy = Instantiate(spawnPoint.enemyPrefab, spawnPoint.GetComponent<Transform>().position, Quaternion.identity);
+                enemy.GetComponent<Enemy>().OnDeath += () => OnEnemyDeath(spawnPoint);
                 enemy.transform.parent = spawnPoint.transform;
                 spawnPointStates[spawnPoint] = false;
             }

@@ -11,10 +11,11 @@ public class UIPlayer : MonoBehaviour
     GameObject Profile;
     PlayerLevel playerLevel;
     PlayerState playerState;
+    PlayerJob playerJob;
 
     readonly float HPHeight = 1.0f;
     
-    GameObject prfHPbar;
+    public GameObject prfHPbar;
     RectTransform MaxHPbar;
     Image HPbar;
 
@@ -33,8 +34,8 @@ public class UIPlayer : MonoBehaviour
 
         playerLevel = GetComponent<PlayerLevel>();
         playerState = GetComponent<PlayerState>();
+        playerJob = GetComponent<PlayerJob>();
 
-        prfHPbar = transform.GetChild(1).gameObject;
         MaxHPbar = Instantiate(prfHPbar, Canvas.transform).GetComponent<RectTransform>();
         HPbar = MaxHPbar.transform.Find("HPbar").GetComponent<Image>();
 

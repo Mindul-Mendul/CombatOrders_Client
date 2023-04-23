@@ -6,12 +6,12 @@ public class PlayerItem : MonoBehaviour
 {
     bool isShop;
     bool enableShopPanel;
-    GameObject shopPanel;
+    public GameObject shopPanel;
+    
     void Awake()
     {
         isShop = false;
         enableShopPanel = false;
-        shopPanel = GameObject.Find("Panel");
         shopPanel.SetActive(false);
     }
 
