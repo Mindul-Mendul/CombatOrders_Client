@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     public readonly int MaxHP = 100;
     public readonly float HPHeight = 0.7f;
     public int expValue;
+    public int moneyValue;
 
     // Start is called before the first frame update
     void Awake()
@@ -122,6 +123,7 @@ public class Enemy : MonoBehaviour
         // 적 캐릭터가 죽었을 때 OnDeath 이벤트를 발생시킴
         OnDeath?.Invoke();
         murderer.GetComponent<PlayerState>().EXPPoint += expValue;
+        murderer.GetComponent<PlayerState>().Money += moneyValue;
         Destroy(MaxHPbar.gameObject);
         Destroy(HPbar);
         Destroy(gameObject);
