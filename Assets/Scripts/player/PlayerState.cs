@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour
     
     PlayerLevel playerLevel;
     PlayerJob playerJob;
+    PlayerItem playerItem;
 
     private int level = 1;
     private int expPoint = 0;
@@ -16,10 +17,9 @@ public class PlayerState : MonoBehaviour
     private int hp = 100;
     private float attSpd = 1;
     private float movSpd = 4;
-    private int money = 0;
+    private int money = 10000;
     private float hpRecoverTerm = 10f;
     private int hpRecovery = 5;
-    public Item[] backpack;
 
     public int Level { get => level; set => level = value; }
     public int EXPPoint { get => expPoint; set => expPoint = value; }
@@ -32,7 +32,6 @@ public class PlayerState : MonoBehaviour
     public float MovSpd { get => movSpd; set => movSpd = value; }
     private float HPRecoverTerm { get => hpRecoverTerm; set => hpRecoverTerm = value; }
     private int HPRecovery { get => hpRecovery; set => hpRecovery = value; }
-    public Item[] Backpack { get => backpack ; set => backpack = value; }
     public int Money { get => money; set => money = value; }
 
     void Awake()
@@ -57,10 +56,16 @@ public class PlayerState : MonoBehaviour
         playerLevel.Levelup();
     }
 
-    void FixedUpdate()
+    private void Stat()
     {
-        
-    }
+        att = playerJob.Att;
+        def = 0;
+        maxHP = 100;
+        hp = 100;
+        attSpd = 1;
+        movSpd = 4;
+        money = 10000;
+}
 
     public void SetAnimBool(string name, bool value)
     {

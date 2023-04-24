@@ -83,7 +83,6 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("Ground"))
         {
-            // 땅과 충돌한 경우 isGrounded를 true로 설정합니다.
             if (rigid.velocity.y <= 0)
             {
                 RaycastHit2D hitBottomLeft = Physics2D.Raycast((Vector2)rigid.transform.position+(Vector2.left*0.3f), Vector2.down, 0.7f, GroundMask);
@@ -121,10 +120,6 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        RaycastHit2D hitBottomLeft = Physics2D.Raycast((Vector2)rigid.transform.position + (Vector2.left * 0.3f), Vector2.down, 0.7f, GroundMask);
-        RaycastHit2D hitBottom = Physics2D.Raycast(rigid.transform.position, Vector2.down, 0.7f, GroundMask);
-        RaycastHit2D hitBottomRight = Physics2D.Raycast((Vector2)rigid.transform.position + (Vector2.right * 0.3f), Vector2.down, 0.7f, GroundMask);
-
         if (other.gameObject.CompareTag("Ground"))
         {
             playerState.SetAnimBool("isJumping", true);

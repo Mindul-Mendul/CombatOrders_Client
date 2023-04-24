@@ -6,11 +6,18 @@ using UnityEngine.Playables;
 public class PlayerJob : MonoBehaviour
 {
     public GameObject job;
-    int Att;
-    int Def;
-    int MaxHP;
-    float MovSpd;
-    float AttSpd;
+
+    private int att;
+    private int def;
+    private int maxHP;
+    private float movSpd;
+    private float attSpd;
+
+    public int Att { get => att; }
+    public int Def { get => def; }
+    public int MaxHP { get => maxHP; }
+    public float MovSpd { get => movSpd; }
+    public float AttSpd { get => attSpd; }
 
     SkillController FlatHit;
     SkillController Q;
@@ -52,11 +59,11 @@ public class PlayerJob : MonoBehaviour
         GameObject jobObj = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
         Job job = jobObj.GetComponent<Job>();
 
-        Att = job.Att;
-        Def = job.Def;
-        MaxHP = job.MaxHP;
-        MovSpd = job.MovSpd;
-        AttSpd = job.AttSpd;
+        att = job.Att;
+        def = job.Def;
+        maxHP = job.MaxHP;
+        movSpd = job.MovSpd;
+        attSpd = job.AttSpd;
         
         FlatHit = job.FlatHit;
         Q = job.Q.GetComponent<SkillController>();

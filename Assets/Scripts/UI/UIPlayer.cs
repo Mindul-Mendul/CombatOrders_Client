@@ -22,6 +22,9 @@ public class UIPlayer : MonoBehaviour
     GameObject MaxEXPbar;
     Image EXPbar;
 
+    GameObject Inventory;
+    public GameObject[] Slot = new GameObject[10];
+
     public TextMeshProUGUI textLevel;
     public TextMeshProUGUI textAtt;
     public TextMeshProUGUI textDef;
@@ -43,6 +46,9 @@ public class UIPlayer : MonoBehaviour
 
         MaxEXPbar = Profile.transform.Find("PlayerUI/EXPbar_bg").gameObject;
         EXPbar = MaxEXPbar.transform.Find("EXPbar").GetComponent<Image>();
+
+        Inventory = Profile.transform.Find("Inventory").gameObject;
+        for(int i=0; i<10; i++) Slot[i] = Inventory.transform.GetChild(i).gameObject;
 
         UpdateText();
     }
