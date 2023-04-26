@@ -11,13 +11,13 @@ public class PlayerState : MonoBehaviour
     private int level = 1;
     private int expPoint = 0;
     private int team = 1;
-    private int att = 1;
+    private int att = 0;
     private int def = 0;
-    private int maxHP = 100;
-    private int hp = 100;
+    private int maxHP = 1;
+    private int hp = 1;
     private float attSpd = 1;
     private float movSpd = 4;
-    private int money = 10000;
+    private int money = 0;
     private float hpRecoverTerm = 10f;
     private int hpRecovery = 5;
 
@@ -56,15 +56,13 @@ public class PlayerState : MonoBehaviour
         playerLevel.Levelup();
     }
 
-    private void Stat()
+    public void Stat()
     {
         att = playerJob.Att;
-        def = 0;
-        maxHP = 100;
-        hp = 100;
-        attSpd = 1;
-        movSpd = 4;
-        money = 10000;
+        def = playerJob.Def;
+        maxHP = playerJob.MaxHP;
+        attSpd = playerJob.AttSpd;
+        movSpd = playerJob.MovSpd;
 }
 
     public void SetAnimBool(string name, bool value)

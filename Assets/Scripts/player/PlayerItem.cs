@@ -8,7 +8,6 @@ public class PlayerItem : MonoBehaviour
     bool isShop;
     bool enableShopPanel;
     public GameObject shopPanel;
-    
 
     UIPlayer ui;
     private Item[] backpack = new Item[10];

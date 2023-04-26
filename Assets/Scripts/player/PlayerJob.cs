@@ -5,14 +5,18 @@ using UnityEngine.Playables;
 
 public class PlayerJob : MonoBehaviour
 {
-    public GameObject job;
+    GameObject job;
 
+    PlayerState playerState;
+
+    private int level;
     private int att;
     private int def;
     private int maxHP;
     private float movSpd;
     private float attSpd;
 
+    public int Level { get => level; set => level = value; }
     public int Att { get => att; }
     public int Def { get => def; }
     public int MaxHP { get => maxHP; }
@@ -27,6 +31,8 @@ public class PlayerJob : MonoBehaviour
 
     void Awake()
     {
+        playerState = GetComponent<PlayerState>();
+        job = GameObject.Find("Job/JobHuman");
         GetaJob(job);
     }
 
@@ -54,7 +60,7 @@ public class PlayerJob : MonoBehaviour
         }
     }
 
-    void GetaJob(GameObject jobPrefab)
+    public void GetaJob(GameObject jobPrefab)
     {
         GameObject jobObj = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
         Job job = jobObj.GetComponent<Job>();
@@ -70,5 +76,7 @@ public class PlayerJob : MonoBehaviour
         W = job.W.GetComponent<SkillController>();
         E = job.E.GetComponent<SkillController>();
         R = job.R.GetComponent<SkillController>();
+
+        playerState.Stat();
     }
 }
