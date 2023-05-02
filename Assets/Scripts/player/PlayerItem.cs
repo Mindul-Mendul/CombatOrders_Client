@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerItem : MonoBehaviour
 {
+    Stat stat = new();
     bool isShop;
     bool enableShopPanel;
     public GameObject shopPanel;
 
+    public Stat Stat { get => stat; }
+
     UIPlayer ui;
+    PlayerState playerState;
     private Item[] backpack = new Item[10];
 
     void Awake()
     {
+        playerState = GetComponent<PlayerState>();
         ui = GetComponent<UIPlayer>();
         isShop = false;
         enableShopPanel = false;
@@ -28,6 +34,14 @@ public class PlayerItem : MonoBehaviour
             {
                 backpack[i] = item;
                 ui.Slot[i].GetComponent<Image>().sprite = item.image.sprite;
+
+                stat.Att += backpack[i].Att;
+                stat.Def += backpack[i].Def;
+                stat.MaxHP += backpack[i].MaxHP;
+                stat.AttSpd += backpack[i].AttSpd;
+                stat.MovSpd += backpack[i].MovSpd;
+                playerState.UpdateStat();
+
                 return true;
             }
         }
@@ -36,6 +50,13 @@ public class PlayerItem : MonoBehaviour
 
     public bool Pop(int i)
     {
+        stat.Att -= backpack[i].Att;
+        stat.Def -= backpack[i].Def;
+        stat.MaxHP -= backpack[i].MaxHP;
+        stat.AttSpd -= backpack[i].AttSpd;
+        stat.MovSpd -= backpack[i].MovSpd;
+        playerState.UpdateStat();
+
         backpack[i] = null;
         return true;
     }

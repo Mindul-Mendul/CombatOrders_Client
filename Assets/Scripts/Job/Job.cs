@@ -3,23 +3,17 @@ using UnityEngine;
 
 public class Job: MonoBehaviour
 {
-    int att;
-    int def;
-    int maxHP;
-    float movSpd;
-    float attSpd;
+    public int Att;
+    public int Def;
+    public int MaxHP;
+    public float MovSpd;
+    public float AttSpd;
 
     SkillController flatHit;
     SkillController q;
     SkillController w;
     SkillController e;
     SkillController r;
-
-    public int Att { get => att; }
-    public int Def { get => def; }
-    public int MaxHP { get => maxHP; }
-    public float MovSpd { get => movSpd; }
-    public float AttSpd { get => attSpd; }
 
     public SkillController FlatHit { get => flatHit; }
     public SkillController Q { get => q; }

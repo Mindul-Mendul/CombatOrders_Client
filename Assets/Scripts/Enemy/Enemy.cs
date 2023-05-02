@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            OnDamaged(100, other.gameObject);
+            OnDamaged(100, other.GetComponent<PlayerState>());
         }
 
         if (other.gameObject.CompareTag("Ground"))
@@ -108,22 +108,25 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Skill"))
         {
-            OnDamaged(other.gameObject.GetComponent<Skill>().damage, GameObject.Find("Player"));
+            Skill skill=other.gameObject.GetComponent<Skill>();
+            OnDamaged(skill.Damage, skill.playerState);
         }
     }
 
-    public void OnDamaged(int damage, GameObject murderer)
+    public void OnDamaged(int Damage, PlayerState murderer)
     {
-        HP -= damage;
+        int DmgReal = Damage * murderer.Stat.Att;
+        // 데미지 출력도 할 수 있었으면 좋겠다.
+        HP -= DmgReal;
         if (HP <= 0) Die(murderer);
     }
 
-    public void Die(GameObject murderer)
+    public void Die(PlayerState murderer)
     {
         // 적 캐릭터가 죽었을 때 OnDeath 이벤트를 발생시킴
         OnDeath?.Invoke();
-        murderer.GetComponent<PlayerState>().EXPPoint += expValue;
-        murderer.GetComponent<PlayerState>().Money += moneyValue;
+        murderer.EXPPoint += expValue;
+        murderer.Money += moneyValue;
         Destroy(MaxHPbar.gameObject);
         Destroy(HPbar);
         Destroy(gameObject);

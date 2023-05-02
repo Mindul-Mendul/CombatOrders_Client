@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    float maxSpeed;
-    float maxVSpeed = 15;
-    float jumpPower;
+    public float MaxSpeed = 4f;
+    public float MaxVSpeed = 15f;
+    public float JumpPower = 10f;
     PlayerState playerState;
     Rigidbody2D rigid;
     //private new BoxCollider2D collider;
@@ -26,9 +26,6 @@ public class PlayerMove : MonoBehaviour
         EnemyLayer = LayerMask.NameToLayer("EnemyLayer");
         GroundMask = LayerMask.GetMask("GroundLayer");
 
-        maxSpeed = playerState.MovSpd;
-        jumpPower = 10f;
-
         playerState.SetAnimBool("isJumping", true);
     }
 
@@ -43,13 +40,13 @@ public class PlayerMove : MonoBehaviour
                 // ¹Ù´Ú ¶Õ±â ¹æÁö¿ë ÄÚµå
                 if (hitBottom.collider && hitBottom.collider.name != "GroundM")
                 {
-                    rigid.AddForce(Vector2.down * jumpPower / 3, ForceMode2D.Impulse);
+                    rigid.AddForce(Vector2.down * JumpPower / 3, ForceMode2D.Impulse);
                     playerState.SetAnimBool("isJumping", true);
                 }
             }
             else
             {
-                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
                 playerState.SetAnimBool("isJumping", true);
             }
         }
@@ -64,10 +61,10 @@ public class PlayerMove : MonoBehaviour
         rigid.AddForce(2 * h * Vector2.right, ForceMode2D.Impulse);
 
         // Max Speed
-        if (rigid.velocity.x > maxSpeed) rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
-        else if(rigid.velocity.x < -maxSpeed) rigid.velocity = new Vector2(-maxSpeed, rigid.velocity.y);
-        if (rigid.velocity.y > maxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, maxVSpeed);
-        else if (rigid.velocity.y < -maxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, -maxVSpeed);
+        if (rigid.velocity.x > MaxSpeed) rigid.velocity = new Vector2(MaxSpeed, rigid.velocity.y);
+        else if(rigid.velocity.x < -MaxSpeed) rigid.velocity = new Vector2(-MaxSpeed, rigid.velocity.y);
+        if (rigid.velocity.y > MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, MaxVSpeed);
+        else if (rigid.velocity.y < -MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, -MaxVSpeed);
 
         //isJumping
         if (!playerState.GetAnimBool("isJumping")) rigid.gravityScale = 0;

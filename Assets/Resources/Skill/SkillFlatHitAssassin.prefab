@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5216351553472699391}
   - component: {fileID: 5216351553472699383}
   m_Layer: 11
-  m_Name: SkillFlatHitHuman 1
+  m_Name: SkillFlatHitAssassin
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c019287b4fe3e40a337f620767d062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  Damage: 10
+  playerState: {fileID: 0}
   attackDuration: 0
   attackDelay: 0.54

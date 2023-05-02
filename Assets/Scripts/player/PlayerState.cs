@@ -1,35 +1,29 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerState : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    
+
+    PlayerMove playerMove;
     PlayerLevel playerLevel;
     PlayerJob playerJob;
     PlayerItem playerItem;
 
+    Stat stat = new();
     private int level = 1;
     private int expPoint = 0;
     private int team = 1;
-    private int att = 0;
-    private int def = 0;
-    private int maxHP = 1;
     private int hp = 1;
-    private float attSpd = 1;
-    private float movSpd = 4;
-    private int money = 0;
-    private float hpRecoverTerm = 10f;
+    private int money = 10000;
+    private float hpRecoverTerm = 0.5f;
     private int hpRecovery = 5;
 
+    public Stat Stat { get => stat; }
     public int Level { get => level; set => level = value; }
     public int EXPPoint { get => expPoint; set => expPoint = value; }
     public int Team { get => team; set => team = value; }
-    public int Att { get => att; set => att = value; }
-    public int Def { get => def; set => def = value; }
-    public int MaxHP { get => maxHP; set => maxHP = value; }
     public int HP { get => hp; set => hp = value; }
-    public float AttSpd { get => attSpd; set => attSpd = value; }
-    public float MovSpd { get => movSpd; set => movSpd = value; }
     private float HPRecoverTerm { get => hpRecoverTerm; set => hpRecoverTerm = value; }
     private int HPRecovery { get => hpRecovery; set => hpRecovery = value; }
     public int Money { get => money; set => money = value; }
@@ -37,9 +31,11 @@ public class PlayerState : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        
+        playerMove = GetComponent<PlayerMove>();
         playerLevel = GetComponent<PlayerLevel>();
         playerJob = GetComponent<PlayerJob>();
+        playerItem = GetComponent<PlayerItem>();
 
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
@@ -56,14 +52,16 @@ public class PlayerState : MonoBehaviour
         playerLevel.Levelup();
     }
 
-    public void Stat()
+    public void UpdateStat()
     {
-        att = playerJob.Att;
-        def = playerJob.Def;
-        maxHP = playerJob.MaxHP;
-        attSpd = playerJob.AttSpd;
-        movSpd = playerJob.MovSpd;
-}
+        stat.Att = playerJob.Stat.Att + playerItem.Stat.Att;
+        stat.Def = playerJob.Stat.Def + playerItem.Stat.Def;
+        stat.MaxHP = playerJob.Stat.MaxHP + playerItem.Stat.MaxHP;
+        stat.AttSpd = playerJob.Stat.AttSpd + playerItem.Stat.AttSpd;
+        stat.MovSpd = playerJob.Stat.MovSpd + playerItem.Stat.MovSpd;
+
+        playerMove.MaxSpeed = stat.MovSpd;
+    }
 
     public void SetAnimBool(string name, bool value)
     {
@@ -101,7 +99,7 @@ public class PlayerState : MonoBehaviour
     void HPRecover()
     {
         hp += hpRecovery;
-        hp = Mathf.Min(hp, maxHP);
+        hp = Mathf.Min(hp, stat.MaxHP);
         Invoke(nameof(HPRecover), HPRecoverTerm);
     }
 }

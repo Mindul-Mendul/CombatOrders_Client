@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UIPlayer : MonoBehaviour
 {
     GameObject Canvas;
-    GameObject Profile;
+    Transform Profile;
     PlayerLevel playerLevel;
     PlayerState playerState;
     PlayerJob playerJob;
@@ -19,36 +19,49 @@ public class UIPlayer : MonoBehaviour
     RectTransform MaxHPbar;
     Image HPbar;
 
-    GameObject MaxEXPbar;
+    Transform MaxEXPbar;
     Image EXPbar;
 
-    GameObject Inventory;
+    Transform Inventory;
     public GameObject[] Slot = new GameObject[10];
 
-    public TextMeshProUGUI textLevel;
-    public TextMeshProUGUI textAtt;
-    public TextMeshProUGUI textDef;
-    public TextMeshProUGUI textMovSpd;
-    public TextMeshProUGUI textAttSpd;
-    public TextMeshProUGUI textMoney;
+    Transform Skill;
+
+    Transform Stat;
+    TextMeshProUGUI textLevel;
+    TextMeshProUGUI textAtt;
+    TextMeshProUGUI textDef;
+    TextMeshProUGUI textMovSpd;
+    TextMeshProUGUI textAttSpd;
+    TextMeshProUGUI textMoney;
 
     void Awake()
     {
         Canvas = GameObject.Find("Canvas");
-        Profile = Canvas.transform.Find("Profile").gameObject;
+        Profile = Canvas.transform.Find("Profile");
 
         playerLevel = GetComponent<PlayerLevel>();
         playerState = GetComponent<PlayerState>();
         playerJob = GetComponent<PlayerJob>();
 
         MaxHPbar = Instantiate(prfHPbar, Canvas.transform).GetComponent<RectTransform>();
-        HPbar = MaxHPbar.transform.Find("HPbar").GetComponent<Image>();
+        HPbar = MaxHPbar.Find("HPbar").GetComponent<Image>();
 
-        MaxEXPbar = Profile.transform.Find("PlayerUI/EXPbar_bg").gameObject;
+        MaxEXPbar = Profile.Find("PlayerUI/EXPbar_bg");
         EXPbar = MaxEXPbar.transform.Find("EXPbar").GetComponent<Image>();
 
-        Inventory = Profile.transform.Find("Inventory").gameObject;
+        Inventory = Profile.Find("Inventory");
         for(int i=0; i<10; i++) Slot[i] = Inventory.transform.GetChild(i).gameObject;
+
+        Skill = Profile.transform.Find("UISkill");
+
+        Stat = Profile.transform.Find("Stat");
+        textLevel = Stat.Find("TextLevel").GetComponent<TextMeshProUGUI>();
+        textAtt = Stat.Find("LabelAtt/TextAtt").GetComponent<TextMeshProUGUI>();
+        textDef = Stat.Find("LabelDef/TextDef").GetComponent<TextMeshProUGUI>();
+        textAttSpd = Stat.Find("LabelAsp/TextAsp").GetComponent<TextMeshProUGUI>();
+        textMovSpd = Stat.Find("LabelMsp/TextMsp").GetComponent<TextMeshProUGUI>();
+        textMoney = Stat.Find("LabelMoney/TextMoney").GetComponent<TextMeshProUGUI>();
 
         UpdateText();
     }
@@ -56,22 +69,26 @@ public class UIPlayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        UpdateBar();
+        UpdateText();
+    }
+
+    void UpdateBar()
+    {
         Vector3 _HPbarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + HPHeight, 0));
         MaxHPbar.position = _HPbarPos;
         MaxHPbar.transform.SetAsFirstSibling();
-        HPbar.fillAmount = (float)playerState.HP / playerState.MaxHP;
+        HPbar.fillAmount = (float)playerState.HP / playerState.Stat.MaxHP;
         EXPbar.fillAmount = (float)playerState.EXPPoint / playerLevel.LevelupTable[playerState.Level];
-
-        UpdateText();
     }
 
     void UpdateText()
     {
         textLevel.text = playerState.Level.ToString();
-        textAtt.text = playerState.Att.ToString();
-        textDef.text = playerState.Def.ToString();
-        textMovSpd.text = playerState.MovSpd.ToString();
-        textAttSpd.text = playerState.AttSpd.ToString();
+        textAtt.text = playerState.Stat.Att.ToString();
+        textDef.text = playerState.Stat.Def.ToString();
+        textMovSpd.text = playerState.Stat.MovSpd.ToString();
+        textAttSpd.text = playerState.Stat.AttSpd.ToString();
         textMoney.text = playerState.Money.ToString();
     }
 }

@@ -5,16 +5,15 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    SpriteMask spriteMask;
-    public int damage;
+    public int Damage;
 
+    public PlayerState playerState;
     public float attackDuration; // 공격 지속 시간
     public float attackDelay; // 공격 딜레이 시간
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteMask = GetComponent<SpriteMask>();
     }
 
     // Update is called once per frame

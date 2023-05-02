@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpwanController: MonoBehaviour
 {
     public SpwanPoint[] spawnPoints;
-    public float spawnDelay = 2f;
+    public float spawnDelay;
 
     private Dictionary<SpwanPoint, bool> spawnPointStates = new Dictionary<SpwanPoint, bool>();
 

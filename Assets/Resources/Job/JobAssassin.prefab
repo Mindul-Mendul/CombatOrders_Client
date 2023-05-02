@@ -94,6 +94,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834b1b775d5319247861c4210bace12f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Att: 7
+  Def: 0
+  MaxHP: 50
+  MovSpd: 7
+  AttSpd: 0.3
+  FlatHit: {fileID: 6424243160796769927}
+  Q: {fileID: 6424243160796769927}
+  W: {fileID: 6424243160796769927}
+  E: {fileID: 6424243160796769927}
+  R: {fileID: 6424243160796769927}
 --- !u!1 &6424243160796769925
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UISprite: {fileID: 0}
-  SkillObj: {fileID: 5216351553472699361, guid: 3a2e38d4550622c4192aae48ded675f7,
+  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
   level: 1
   maxStack: 1
@@ -203,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UISprite: {fileID: 21300000, guid: 945bc97a66c2d674f85f145cf29f390a, type: 3}
-  SkillObj: {fileID: 5658771674074208177, guid: 1f01051426ff9914eb8dd11d39f9680b,
+  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
   level: 1
   maxStack: 1
@@ -261,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UISprite: {fileID: 21300000, guid: 9707933b3bc877d498986a0dc7260c62, type: 3}
-  SkillObj: {fileID: 2126044357153227283, guid: b73b7f12a47eb1b459d3dea05b23002c,
+  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
   level: 1
   maxStack: 1
@@ -319,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UISprite: {fileID: 21300000, guid: c0e7c90fabb7f084bbbddbd82defbef5, type: 3}
-  SkillObj: {fileID: 1147688505893268515, guid: 0013b0ccf74d38c488f69e32267424d1,
+  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
   level: 1
   maxStack: 1
@@ -377,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UISprite: {fileID: 21300000, guid: a7fe6e3334afa2e4b90e2c773c376619, type: 3}
-  SkillObj: {fileID: 4614957805442350015, guid: fc5b8fcce251f0a47b4a36e7e3b9393a,
+  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
   level: 1
   maxStack: 1

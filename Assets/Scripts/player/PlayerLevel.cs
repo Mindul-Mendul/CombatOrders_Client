@@ -24,8 +24,9 @@ public class PlayerLevel : MonoBehaviour
         while (playerState.Level < 13 && playerState.EXPPoint >= levelupTable[playerState.Level])
         {
             playerState.EXPPoint -= levelupTable[playerState.Level++];
-            playerState.HP = playerState.MaxHP;
-            Play();
+            playerState.HP = playerState.Stat.MaxHP;
+            ps.Play();
+            Invoke(nameof(Stop), 3f);
         }
         if (playerState.Level == 13)
         {
@@ -34,19 +35,8 @@ public class PlayerLevel : MonoBehaviour
 
         playerJob.Level += playerState.Level;
     }
-
-    private void Play()
+    void Stop()
     {
-        // 파티클 시스템을 재생합니다.
-        ps.Play();
-
-        // 3초 후에 Stop 메서드를 호출하여 파티클 시스템을 멈춥니다.
-        Invoke(nameof(Stop), 3f);
-    }
-
-    private void Stop()
-    {
-        // 파티클 시스템을 멈춥니다.
         ps.Stop();
     }
 }

@@ -2,26 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Profiling;
+using UnityEngine.UI;
 
 public class PlayerJob : MonoBehaviour
 {
     GameObject job;
 
     PlayerState playerState;
+    Image ui;
 
     private int level;
-    private int att;
-    private int def;
-    private int maxHP;
-    private float movSpd;
-    private float attSpd;
+    Stat stat = new();
 
     public int Level { get => level; set => level = value; }
-    public int Att { get => att; }
-    public int Def { get => def; }
-    public int MaxHP { get => maxHP; }
-    public float MovSpd { get => movSpd; }
-    public float AttSpd { get => attSpd; }
+    public Stat Stat { get => stat; }
 
     SkillController FlatHit;
     SkillController Q;
@@ -32,29 +27,29 @@ public class PlayerJob : MonoBehaviour
     void Awake()
     {
         playerState = GetComponent<PlayerState>();
-        job = GameObject.Find("Job/JobHuman");
-        GetaJob(job);
+        GetaJob(GameObject.Find("Job/JobHuman"));
+        ui = GameObject.Find("Canvas/Profile/Illust").GetComponent<Image>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && FlatHit.isCool)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && FlatHit.stackCount>0)
         {
             FlatHit.UseSKill(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.Q) && Q.isCool)
+        if (Input.GetKeyDown(KeyCode.Q) && Q.stackCount > 0)
         {
             Q.UseSKill(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.W) && W.isCool)
+        if (Input.GetKeyDown(KeyCode.W) && W.stackCount > 0)
         {
             W.UseSKill(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.E) && E.isCool)
+        if (Input.GetKeyDown(KeyCode.E) && E.stackCount > 0)
         {
             E.UseSKill(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.R) && R.isCool)
+        if (Input.GetKeyDown(KeyCode.R) && R.stackCount > 0)
         {
             R.UseSKill(gameObject);
         }
@@ -62,21 +57,24 @@ public class PlayerJob : MonoBehaviour
 
     public void GetaJob(GameObject jobPrefab)
     {
-        GameObject jobObj = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
-        Job job = jobObj.GetComponent<Job>();
+        Destroy(job);
+        job = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+        Job jobJob = job.GetComponent<Job>();
 
-        att = job.Att;
-        def = job.Def;
-        maxHP = job.MaxHP;
-        movSpd = job.MovSpd;
-        attSpd = job.AttSpd;
+        stat.Att = jobJob.Att;
+        stat.Def = jobJob.Def;
+        stat.MaxHP = jobJob.MaxHP;
+        stat.MovSpd = jobJob.MovSpd;
+        stat.AttSpd = jobJob.AttSpd;
         
-        FlatHit = job.FlatHit;
-        Q = job.Q.GetComponent<SkillController>();
-        W = job.W.GetComponent<SkillController>();
-        E = job.E.GetComponent<SkillController>();
-        R = job.R.GetComponent<SkillController>();
+        FlatHit = jobJob.FlatHit;
+        Q = jobJob.Q;
+        W = jobJob.W;
+        E = jobJob.E;
+        R = jobJob.R;
 
-        playerState.Stat();
+        if(ui) ui.GetComponent<Image>().sprite = job.GetComponent<Image>().sprite;
+
+        playerState.UpdateStat();
     }
 }
