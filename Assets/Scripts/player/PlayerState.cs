@@ -60,6 +60,7 @@ public class PlayerState : MonoBehaviour
         //Change Layer (Immortal Active)
         gameObject.layer = 7;
         hp -= 10;
+        playerMove.Hide = false;
 
         //View Alpha
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);

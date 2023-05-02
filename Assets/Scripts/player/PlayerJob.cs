@@ -71,7 +71,6 @@ public class PlayerJob : MonoBehaviour
 
     public void Levelup()
     {
-        Debug.Log(playerState.Level);
         stat.Att = job.AttLevelTable[playerState.Level];
         stat.Def = job.DefLevelTable[playerState.Level];
         stat.MaxHP = job.MaxHPLevelTable[playerState.Level];

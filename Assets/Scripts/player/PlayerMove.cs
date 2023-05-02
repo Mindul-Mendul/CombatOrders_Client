@@ -9,10 +9,12 @@ public class PlayerMove : MonoBehaviour
     bool chaos = false; // È¥¶õ
     bool faint = false; // ±âÀý
     bool slow = false; // µÐÈ­
+    bool hide = true; // Àº½Å
 
     public bool Chaos { get => chaos; set => chaos = value; }
     public bool Faint { get => faint; set => faint = value; }
     public bool Slow { get => slow; set => slow = value; }
+    public bool Hide { get => hide; set => hide = value; }
 
     public float MaxSpeed = 4f;
     public float MaxVSpeed = 15f;
@@ -22,6 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     Rigidbody2D rigid;
     //private new BoxCollider2D collider;
+    SpriteRenderer spriteRenderer;
     Animator animator;
 
     private int PlayerLayer, GroundLayer, EnemyLayer;
@@ -29,10 +32,11 @@ public class PlayerMove : MonoBehaviour
     
     void Awake()
     {
-        animator = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
         rigid = GetComponent<Rigidbody2D>();
         //collider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         PlayerLayer = LayerMask.NameToLayer("PlayerLayer");
         GroundLayer = LayerMask.NameToLayer("GroundLayer");
@@ -69,15 +73,17 @@ public class PlayerMove : MonoBehaviour
         // flip Sprite
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            GetComponent<SpriteRenderer>().flipX = (!chaos && Input.GetAxisRaw("Horizontal") == -1) || (chaos && Input.GetAxisRaw("Horizontal") == 1);
+            spriteRenderer.flipX = (!chaos && Input.GetAxisRaw("Horizontal") == -1) || (chaos && Input.GetAxisRaw("Horizontal") == 1);
         }
+
+        if (hide) spriteRenderer.color = new Color(1, 1, 1, 0.3f);
     }
 
     void FixedUpdate()
     {
         //Move By key control
         float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(2 * h * (faint ? Vector2.right : Vector2.left), ForceMode2D.Impulse);
+        rigid.AddForce(2 * h * (chaos ? Vector2.left : Vector2.right), ForceMode2D.Impulse);
 
         // Max Speed
         float hspd = faint ? 0 : (slow ? MaxSpeed/4 : MaxSpeed);

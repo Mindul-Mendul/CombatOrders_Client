@@ -17,13 +17,11 @@ public class SkillController: MonoBehaviour
     public int stackCount;
     public float cooltime;
     bool isCooling;
-    bool isAttack;
 
     void Awake()
     {
         stackCount = maxStack;
         isCooling = false;
-        isAttack = false;
         if (UISprite && UIImage)
         {
             UIImage.sprite = UISprite;

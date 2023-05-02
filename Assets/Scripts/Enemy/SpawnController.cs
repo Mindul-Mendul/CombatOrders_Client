@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpwanController: MonoBehaviour
+public class SpawnController: MonoBehaviour
 {
-    public SpwanPoint[] spawnPoints;
-    public float spawnDelay;
+    public float spawnDelay=3f;
 
-    private Dictionary<SpwanPoint, bool> spawnPointStates = new Dictionary<SpwanPoint, bool>();
+    SpawnPoint[] spawnPoints;
+    Dictionary<SpawnPoint, bool> spawnPointStates = new Dictionary<SpawnPoint, bool>();
 
     private void Awake()
     {
-        foreach (SpwanPoint spawnPoint in spawnPoints)
+        spawnPoints=new SpawnPoint[transform.childCount];
+        for (int i= 0; i< transform.childCount; i++)
         {
-            spawnPointStates[spawnPoint] = true;
+            spawnPoints[i]=transform.GetChild(i).GetComponent<SpawnPoint>();
+            spawnPointStates[spawnPoints[i]] = true;
         }
 
         InvokeRepeating("SpawnEnemy", spawnDelay, spawnDelay);
@@ -21,7 +23,7 @@ public class SpwanController: MonoBehaviour
 
     private void SpawnEnemy()
     {
-        foreach (SpwanPoint spawnPoint in spawnPoints)
+        foreach (SpawnPoint spawnPoint in spawnPoints)
         {
             if (spawnPointStates[spawnPoint])
             {
@@ -33,7 +35,7 @@ public class SpwanController: MonoBehaviour
         }
     }
 
-    private void OnEnemyDeath(SpwanPoint spawnPoint)
+    private void OnEnemyDeath(SpawnPoint spawnPoint)
     {
         // 해당 스폰 포인트에서 생성된 몹이 죽으면 상태를 true로 변경하여 다시 몹 생성 가능하도록 함
         spawnPointStates[spawnPoint] = true;
