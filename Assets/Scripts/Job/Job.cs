@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Job: MonoBehaviour
 {
-    public int Att;
-    public int Def;
-    public int MaxHP;
-    public float MovSpd;
-    public float AttSpd;
+    public int[] AttLevelTable;
+    public int[] DefLevelTable;
+    public int[] MaxHPLevelTable;
+    public float[] AttSpdLevelTable;
+    public float[] MovSpdLevelTable;
 
     SkillController flatHit;
     SkillController q;

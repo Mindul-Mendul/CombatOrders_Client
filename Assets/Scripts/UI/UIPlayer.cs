@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UI;
@@ -35,6 +36,8 @@ public class UIPlayer : MonoBehaviour
     TextMeshProUGUI textAttSpd;
     TextMeshProUGUI textMoney;
 
+    Image UIIllustration;
+
     void Awake()
     {
         Canvas = GameObject.Find("Canvas");
@@ -63,6 +66,8 @@ public class UIPlayer : MonoBehaviour
         textMovSpd = Stat.Find("LabelMsp/TextMsp").GetComponent<TextMeshProUGUI>();
         textMoney = Stat.Find("LabelMoney/TextMoney").GetComponent<TextMeshProUGUI>();
 
+        UIIllustration = GameObject.Find("Canvas/Profile/Illust").GetComponent<Image>();
+
         UpdateText();
     }
 
@@ -71,6 +76,7 @@ public class UIPlayer : MonoBehaviour
     {
         UpdateBar();
         UpdateText();
+        UIIllustration.sprite = playerJob.jobObject.GetComponent<Image>().sprite;
     }
 
     void UpdateBar()

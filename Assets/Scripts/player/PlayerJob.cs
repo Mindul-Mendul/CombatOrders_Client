@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,12 @@ using UnityEngine.UI;
 
 public class PlayerJob : MonoBehaviour
 {
-    GameObject job;
+    public GameObject jobObject;
+    Job job;
 
     PlayerState playerState;
-    Image ui;
 
-    private int level;
     Stat stat = new();
-
-    public int Level { get => level; set => level = value; }
     public Stat Stat { get => stat; }
 
     SkillController FlatHit;
@@ -28,7 +26,7 @@ public class PlayerJob : MonoBehaviour
     {
         playerState = GetComponent<PlayerState>();
         GetaJob(GameObject.Find("Job/JobHuman"));
-        ui = GameObject.Find("Canvas/Profile/Illust").GetComponent<Image>();
+        job = jobObject.GetComponent<Job>();
     }
 
     void Update()
@@ -57,24 +55,27 @@ public class PlayerJob : MonoBehaviour
 
     public void GetaJob(GameObject jobPrefab)
     {
-        Destroy(job);
-        job = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
-        Job jobJob = job.GetComponent<Job>();
+        if(jobObject) Destroy(jobObject);
+        jobObject = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+        job = jobObject.GetComponent<Job>();
 
-        stat.Att = jobJob.Att;
-        stat.Def = jobJob.Def;
-        stat.MaxHP = jobJob.MaxHP;
-        stat.MovSpd = jobJob.MovSpd;
-        stat.AttSpd = jobJob.AttSpd;
-        
-        FlatHit = jobJob.FlatHit;
-        Q = jobJob.Q;
-        W = jobJob.W;
-        E = jobJob.E;
-        R = jobJob.R;
-
-        if(ui) ui.GetComponent<Image>().sprite = job.GetComponent<Image>().sprite;
+        FlatHit = job.FlatHit;
+        Q = job.Q;
+        W = job.W;
+        E = job.E;
+        R = job.R;
 
         playerState.UpdateStat();
+        Levelup();
+    }
+
+    public void Levelup()
+    {
+        Debug.Log(playerState.Level);
+        stat.Att = job.AttLevelTable[playerState.Level];
+        stat.Def = job.DefLevelTable[playerState.Level];
+        stat.MaxHP = job.MaxHPLevelTable[playerState.Level];
+        stat.MovSpd = job.MovSpdLevelTable[playerState.Level];
+        stat.AttSpd = job.AttSpdLevelTable[playerState.Level];
     }
 }

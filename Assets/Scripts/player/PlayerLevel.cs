@@ -25,6 +25,8 @@ public class PlayerLevel : MonoBehaviour
         {
             playerState.EXPPoint -= levelupTable[playerState.Level++];
             playerState.HP = playerState.Stat.MaxHP;
+            playerJob.Levelup();
+            playerState.UpdateStat();
             ps.Play();
             Invoke(nameof(Stop), 3f);
         }
@@ -32,8 +34,6 @@ public class PlayerLevel : MonoBehaviour
         {
             playerState.EXPPoint = 0;
         }
-
-        playerJob.Level += playerState.Level;
     }
     void Stop()
     {
