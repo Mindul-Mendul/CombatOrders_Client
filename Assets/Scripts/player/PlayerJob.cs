@@ -15,6 +15,8 @@ public class PlayerJob : MonoBehaviour
 
     Stat stat = new();
     public Stat Stat { get => stat; }
+    int skillpoint;
+    public int Skillpoint { get => skillpoint; set => skillpoint = value; }
 
     SkillController FlatHit;
     SkillController Q;
@@ -27,36 +29,72 @@ public class PlayerJob : MonoBehaviour
         playerState = GetComponent<PlayerState>();
         GetaJob(GameObject.Find("Job/JobHuman"));
         job = jobObject.GetComponent<Job>();
+
+        skillpoint = 11;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && FlatHit.stackCount>0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && FlatHit.StackCount > 0)
         {
             FlatHit.UseSKill(gameObject);
         }
-        if (Input.GetKeyDown(KeyCode.Q) && Q.stackCount > 0)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            Q.UseSKill(gameObject);
+            if (Input.GetKey(KeyCode.LeftControl) && skillpoint > 0 && Q.Level < 4)
+            {
+                 Q.Level++;
+                 skillpoint--;
+            }
+            else if (Q.Level > 0 && Q.StackCount > 0)
+            {
+                 Q.UseSKill(gameObject);
+            }
+            
         }
-        if (Input.GetKeyDown(KeyCode.W) && W.stackCount > 0)
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            W.UseSKill(gameObject);
+            if (Input.GetKey(KeyCode.LeftControl) && skillpoint > 0 && W.Level < 4)
+            {
+                W.Level++;
+                skillpoint--;
+            }
+            else if (W.Level > 0 && W.StackCount > 0)
+            {
+                W.UseSKill(gameObject);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.E) && E.stackCount > 0)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            E.UseSKill(gameObject);
+            if (Input.GetKey(KeyCode.LeftControl) && skillpoint > 0 && E.Level < 4)
+            {
+                E.Level++;
+                skillpoint--;
+            }
+            else if (E.Level > 0 && E.StackCount > 0)
+            {
+                E.UseSKill(gameObject);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.R) && R.stackCount > 0)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            R.UseSKill(gameObject);
+            if (Input.GetKey(KeyCode.LeftControl) && skillpoint > 0 && R.Level < 1)
+            {
+                R.Level++;
+                skillpoint--;
+            }
+            else if (R.Level > 0 && R.StackCount > 0)
+            {
+                R.UseSKill(gameObject);
+            }
         }
     }
 
     public void GetaJob(GameObject jobPrefab)
     {
         if(jobObject) Destroy(jobObject);
-        jobObject = Instantiate(jobPrefab, gameObject.transform.position, new Quaternion(0, 0, 0, 0));
+        jobObject = Instantiate(jobPrefab);
+        jobObject.transform.SetParent(gameObject.transform);
         job = jobObject.GetComponent<Job>();
 
         FlatHit = job.FlatHit;
@@ -71,6 +109,7 @@ public class PlayerJob : MonoBehaviour
 
     public void Levelup()
     {
+        skillpoint++;
         stat.Att = job.AttLevelTable[playerState.Level];
         stat.Def = job.DefLevelTable[playerState.Level];
         stat.MaxHP = job.MaxHPLevelTable[playerState.Level];

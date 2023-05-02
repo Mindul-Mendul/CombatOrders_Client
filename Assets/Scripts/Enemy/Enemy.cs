@@ -17,15 +17,15 @@ public class Enemy : MonoBehaviour
     public delegate void OnDeathDelegate();
     public event OnDeathDelegate OnDeath;
 
-    int curMove = 0;
-    public readonly int enemySpeed = 2;
-    float nextThinkTerm = 3f;
-
-    int HP = 100;
-    public readonly int MaxHP = 100;
-    public readonly float HPHeight = 0.7f;
+    public int enemySpeed;
+    public int MaxHP;
     public int expValue;
     public int moneyValue;
+
+    int curMove = 0;
+    float nextThinkTerm = 3f;
+    float HPHeight = 0.7f;
+    int HP = 100;
 
     // Start is called before the first frame update
     void Awake()
@@ -54,12 +54,10 @@ public class Enemy : MonoBehaviour
 
         if (isGrounded)
         {
-            // 땅 위에 있으면 Rigidbody2D의 중력을 0으로 설정하여 땅에 고정시킵니다.
             rigid.gravityScale = 0;
         }
         else
         {
-            // 땅 위에 없으면 Rigidbody2D의 중력을 원래대로 설정합니다.
             rigid.gravityScale = 1;
         }
 
@@ -92,7 +90,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            OnDamaged(100, other.GetComponent<PlayerState>());
+            OnDamaged(MaxHP/10, other.GetComponent<PlayerState>());
         }
 
         if (other.gameObject.CompareTag("Ground"))

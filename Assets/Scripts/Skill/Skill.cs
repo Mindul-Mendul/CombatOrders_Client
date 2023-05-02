@@ -6,6 +6,10 @@ public class Skill : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
     public int Damage;
+    public float Cooltime;
+
+    public int[] DamageLevelTable;
+    public float[] CooltimeLevelTable;
 
     public PlayerState playerState;
     public float attackDuration; // 공격 지속 시간
