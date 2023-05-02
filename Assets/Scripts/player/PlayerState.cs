@@ -3,8 +3,6 @@ using UnityEngine.Playables;
 
 public class PlayerState : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
-
     PlayerMove playerMove;
     PlayerLevel playerLevel;
     PlayerJob playerJob;
@@ -30,8 +28,6 @@ public class PlayerState : MonoBehaviour
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        
         playerMove = GetComponent<PlayerMove>();
         playerLevel = GetComponent<PlayerLevel>();
         playerJob = GetComponent<PlayerJob>();
@@ -42,11 +38,7 @@ public class PlayerState : MonoBehaviour
 
     private void Update()
     {
-        // flip Sprite
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            spriteRenderer.flipX = (Input.GetAxisRaw("Horizontal") == -1);
-        }
+        
 
         //Level up
         playerLevel.Levelup();
@@ -63,16 +55,6 @@ public class PlayerState : MonoBehaviour
         playerMove.MaxSpeed = stat.MovSpd;
     }
 
-    public void SetAnimBool(string name, bool value)
-    {
-        GetComponent<Animator>().SetBool(name, value);
-    }
-
-    public bool GetAnimBool(string name)
-    {
-        return GetComponent<Animator>().GetBool(name);
-    }
-
     public void OnDamaged()
     {
         //Change Layer (Immortal Active)
@@ -80,7 +62,7 @@ public class PlayerState : MonoBehaviour
         hp -= 10;
 
         //View Alpha
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
 
         //Reaction Force
         Invoke(nameof(OffDamaged), 2);
@@ -94,7 +76,7 @@ public class PlayerState : MonoBehaviour
         //Change Layer (Mortal Active)
         gameObject.layer = 6;
         //View Alpha
-        spriteRenderer.color = new Color(1, 1, 1, 1);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
     }
     void HPRecover()
     {

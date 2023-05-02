@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -5,18 +6,30 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    bool chaos = false; // È¥¶õ
+    bool faint = false; // ±âÀý
+    bool slow = false; // µÐÈ­
+
+    public bool Chaos { get => chaos; set => chaos = value; }
+    public bool Faint { get => faint; set => faint = value; }
+    public bool Slow { get => slow; set => slow = value; }
+
     public float MaxSpeed = 4f;
     public float MaxVSpeed = 15f;
     public float JumpPower = 10f;
+
     PlayerState playerState;
+
     Rigidbody2D rigid;
     //private new BoxCollider2D collider;
+    Animator animator;
 
     private int PlayerLayer, GroundLayer, EnemyLayer;
     int GroundMask;
     
     void Awake()
     {
+        animator = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
         rigid = GetComponent<Rigidbody2D>();
         //collider = GetComponent<BoxCollider2D>();
@@ -26,48 +39,55 @@ public class PlayerMove : MonoBehaviour
         EnemyLayer = LayerMask.NameToLayer("EnemyLayer");
         GroundMask = LayerMask.GetMask("GroundLayer");
 
-        playerState.SetAnimBool("isJumping", true);
+        animator.SetBool("isJumping", true);
     }
 
     void Update()
     {
         // break speed with released key
-        if(Input.GetButtonDown("Jump") ) //&& !state.GetAnimBool("isJumping")
+        if(!faint && Input.GetButtonDown("Jump") ) //&& !state.GetAnimBool("isJumping")
         {
             RaycastHit2D hitBottom = Physics2D.Raycast(rigid.transform.position, Vector2.down, 0.7f, GroundMask);
-            if (Input.GetKey(KeyCode.DownArrow))
+            if ((!chaos && Input.GetKey(KeyCode.DownArrow)) || (chaos && !Input.GetKey(KeyCode.DownArrow)))
             {
                 // ¹Ù´Ú ¶Õ±â ¹æÁö¿ë ÄÚµå
                 if (hitBottom.collider && hitBottom.collider.name != "GroundM")
                 {
                     rigid.AddForce(Vector2.down * JumpPower / 3, ForceMode2D.Impulse);
-                    playerState.SetAnimBool("isJumping", true);
+                    animator.SetBool("isJumping", true);
                 }
             }
             else
             {
                 rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
-                playerState.SetAnimBool("isJumping", true);
+                animator.SetBool("isJumping", true);
             }
         }
 
-        playerState.SetAnimBool("isWalking", Mathf.Abs(rigid.velocity.x)>=0.1f);
+        animator.SetBool("isWalking", Mathf.Abs(rigid.velocity.x)>=0.1f);
+
+        // flip Sprite
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = (!chaos && Input.GetAxisRaw("Horizontal") == -1) || (chaos && Input.GetAxisRaw("Horizontal") == 1);
+        }
     }
 
     void FixedUpdate()
     {
         //Move By key control
         float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(2 * h * Vector2.right, ForceMode2D.Impulse);
+        rigid.AddForce(2 * h * (faint ? Vector2.right : Vector2.left), ForceMode2D.Impulse);
 
         // Max Speed
-        if (rigid.velocity.x > MaxSpeed) rigid.velocity = new Vector2(MaxSpeed, rigid.velocity.y);
-        else if(rigid.velocity.x < -MaxSpeed) rigid.velocity = new Vector2(-MaxSpeed, rigid.velocity.y);
+        float hspd = faint ? 0 : (slow ? MaxSpeed/4 : MaxSpeed);
+        if (rigid.velocity.x > hspd) rigid.velocity = new Vector2(hspd, rigid.velocity.y);
+        else if(rigid.velocity.x < -hspd) rigid.velocity = new Vector2(-hspd, rigid.velocity.y);
         if (rigid.velocity.y > MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, MaxVSpeed);
         else if (rigid.velocity.y < -MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, -MaxVSpeed);
 
         //isJumping
-        if (!playerState.GetAnimBool("isJumping")) rigid.gravityScale = 0;
+        if (!animator.GetBool("isJumping")) rigid.gravityScale = 0;
         else rigid.gravityScale = 1;
     }
 
@@ -93,11 +113,11 @@ public class PlayerMove : MonoBehaviour
                     {
                         rigid.velocity = new Vector2(rigid.velocity.x, 0);
                         rigid.MovePosition(rigid.position + new Vector2(0, addtionalPosition));
-                        playerState.SetAnimBool("isJumping", false);
+                        animator.SetBool("isJumping", false);
                     }
                     else
                     {
-                        playerState.SetAnimBool("isJumping", true);
+                        animator.SetBool("isJumping", true);
                     }
                 }
             }
@@ -119,7 +139,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            playerState.SetAnimBool("isJumping", true);
+            animator.SetBool("isJumping", true);
         }
     }
 }
