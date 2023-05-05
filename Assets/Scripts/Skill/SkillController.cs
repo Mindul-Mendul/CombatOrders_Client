@@ -18,7 +18,6 @@ public class SkillController: MonoBehaviour
     public GameObject SkillObj;
     Skill skill;
 
-
     int level;
     public int Level { get => level; set => level = value; }
     public int MaxStack;
@@ -76,6 +75,8 @@ public class SkillController: MonoBehaviour
         {
             skill=Instantiate(SkillObj).GetComponent<Skill>();
             skill.playerState = player.GetComponent<PlayerState>();
+            Debug.Log(level);
+            Debug.Log(skill.DamageLevelTable[level]);
             skill.Damage = skill.DamageLevelTable[level];
             skill.Cooltime = skill.CooltimeLevelTable[level];
 

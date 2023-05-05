@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Job: MonoBehaviour
 {
+    Transform player;
+
     public int[] AttLevelTable;
     public int[] DefLevelTable;
     public int[] MaxHPLevelTable;
@@ -23,6 +25,7 @@ public class Job: MonoBehaviour
 
     private void Awake()
     {
+        player = transform.parent;
         flatHit = transform.GetChild(0).GetComponent<SkillController>();
         q = transform.GetChild(1).GetComponent<SkillController>();
         w = transform.GetChild(2).GetComponent<SkillController>();

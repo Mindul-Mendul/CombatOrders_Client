@@ -40,7 +40,7 @@ public class UIPlayer : MonoBehaviour
 
     void Awake()
     {
-        Canvas = GameObject.Find("Canvas");
+        Canvas = transform.Find("Canvas").gameObject;
         Profile = Canvas.transform.Find("Profile");
 
         playerLevel = GetComponent<PlayerLevel>();

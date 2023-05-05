@@ -27,10 +27,10 @@ public class PlayerJob : MonoBehaviour
     void Awake()
     {
         playerState = GetComponent<PlayerState>();
-        GetaJob(GameObject.Find("Job/JobHuman"));
+        GetaJob((GameObject)Resources.Load("Job/JobHuman"));
         job = jobObject.GetComponent<Job>();
 
-        skillpoint = 11;
+        skillpoint = 0;
     }
 
     void Update()
@@ -113,6 +113,7 @@ public class PlayerJob : MonoBehaviour
         stat.Att = job.AttLevelTable[playerState.Level];
         stat.Def = job.DefLevelTable[playerState.Level];
         stat.MaxHP = job.MaxHPLevelTable[playerState.Level];
+        playerState.HP = stat.MaxHP;
         stat.MovSpd = job.MovSpdLevelTable[playerState.Level];
         stat.AttSpd = job.AttSpdLevelTable[playerState.Level];
     }

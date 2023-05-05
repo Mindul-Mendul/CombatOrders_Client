@@ -159,6 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc951cd2952482e47a6c9ff658949d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamageText: {fileID: 2454563457739789341, guid: caf863856dc2a7147a52894f8436f881,
+    type: 3}
   MaxHP: 900
   expValue: 70
   moneyValue: 900

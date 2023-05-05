@@ -21,7 +21,7 @@ public class Skill : MonoBehaviour
     }
 
     // Update is called once per frame
-    public IEnumerator UseSkill(GameObject player)
+    public virtual IEnumerator UseSkill(GameObject player)
     {
         // µÙ∑π¿Ã
         yield return new WaitForSeconds(attackDuration);

@@ -94,11 +94,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d08caddd48a10a479b8db12c95f887a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Att: 0
-  Def: 0
-  MaxHP: 0
-  MovSpd: 0
-  AttSpd: 0
+  AttLevelTable: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
+  DefLevelTable: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
+  MaxHPLevelTable: 0000000064000000c80000002c01000090010000f401000058020000bc0200002003000084030000e80300004c040000b004000014050000
+  AttSpdLevelTable:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  MovSpdLevelTable:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
 --- !u!1 &6424243160796769925
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,13 +178,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UIStack: {fileID: 0}
+  UILevel: {fileID: 0}
+  UISkillpoint: {fileID: 0}
   UISprite: {fileID: 0}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  level: 1
-  maxStack: 1
-  stackCount: 1
-  cooltime: 0.54
+  MaxStack: 0
+  StackCount: 0
 --- !u!1 &6424243161524389952
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,13 +236,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UIStack: {fileID: 0}
+  UILevel: {fileID: 0}
+  UISkillpoint: {fileID: 0}
   UISprite: {fileID: 21300000, guid: 945bc97a66c2d674f85f145cf29f390a, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  level: 1
-  maxStack: 1
-  stackCount: 1
-  cooltime: 9
+  MaxStack: 0
+  StackCount: 0
 --- !u!1 &6424243161797071133
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,13 +294,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UIStack: {fileID: 0}
+  UILevel: {fileID: 0}
+  UISkillpoint: {fileID: 0}
   UISprite: {fileID: 21300000, guid: 9707933b3bc877d498986a0dc7260c62, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  level: 1
-  maxStack: 1
-  stackCount: 1
-  cooltime: 7
+  MaxStack: 0
+  StackCount: 0
 --- !u!1 &6424243161969557423
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,13 +352,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UIStack: {fileID: 0}
+  UILevel: {fileID: 0}
+  UISkillpoint: {fileID: 0}
   UISprite: {fileID: 21300000, guid: c0e7c90fabb7f084bbbddbd82defbef5, type: 3}
-  SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
+  SkillObj: {fileID: 5216351553472699361, guid: 3b412b74fb43a614e87c8c4054a10e64,
     type: 3}
-  level: 1
-  maxStack: 1
-  stackCount: 1
-  cooltime: 3
+  MaxStack: 0
+  StackCount: 0
 --- !u!1 &6424243162011503873
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,10 +410,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIImage: {fileID: 0}
   UIStack: {fileID: 0}
+  UILevel: {fileID: 0}
+  UISkillpoint: {fileID: 0}
   UISprite: {fileID: 21300000, guid: a7fe6e3334afa2e4b90e2c773c376619, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  level: 1
-  maxStack: 1
-  stackCount: 1
-  cooltime: 5
+  MaxStack: 0
+  StackCount: 0

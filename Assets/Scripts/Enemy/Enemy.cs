@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject DamageText;
+
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -17,15 +19,15 @@ public class Enemy : MonoBehaviour
     public delegate void OnDeathDelegate();
     public event OnDeathDelegate OnDeath;
 
-    public int enemySpeed;
     public int MaxHP;
     public int expValue;
     public int moneyValue;
 
+    int enemySpeed = 2;
     int curMove = 0;
     float nextThinkTerm = 3f;
     float HPHeight = 0.7f;
-    int HP = 100;
+    int HP;
 
     // Start is called before the first frame update
     void Awake()
@@ -42,6 +44,8 @@ public class Enemy : MonoBehaviour
         // Think the next move
         nextThinkTerm = Random.Range(3f, 5f);
         Invoke(nameof(Think), nextThinkTerm);
+
+        HP = MaxHP;
     }
 
     // Update is called once per frame
@@ -113,9 +117,11 @@ public class Enemy : MonoBehaviour
 
     public void OnDamaged(int Damage, PlayerState murderer)
     {
-        int DmgReal = Damage * murderer.Stat.Att;
-        // 데미지 출력도 할 수 있었으면 좋겠다.
-        HP -= DmgReal;
+        int totalDamage = Damage/100 * murderer.Stat.Att;
+        Transform damageText = Instantiate(DamageText.transform, new Vector3(transform.position.x, transform.position.y+spriteRenderer.size.y, -5), Quaternion.identity);
+        damageText.GetComponent<DamageText>().damage = totalDamage;
+        Debug.Log(damageText.GetComponent<DamageText>().damage);
+        HP -= totalDamage;
         if (HP <= 0) Die(murderer);
     }
 
