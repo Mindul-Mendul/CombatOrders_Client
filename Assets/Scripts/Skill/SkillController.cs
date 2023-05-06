@@ -1,58 +1,38 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.UI;
 
 public class SkillController: MonoBehaviour
 {
-    PlayerJob playerJob;
-
-    public Image UIImage;
-    public TextMeshProUGUI UIStack;
-    public TextMeshProUGUI UILevel;
-    public TextMeshProUGUI UISkillpoint;
-    Image UIImageCooltime;
-    public Sprite UISprite;
+    Transform player;
     public GameObject SkillObj;
+    public Sprite SkillSprite;
     Skill skill;
 
     int level;
-    public int Level { get => level; set => level = value; }
+    int stackCount;
+    float cooltime;
     public int MaxStack;
-    public int StackCount;
+    public int Level { get => level; set => level = value; }
+    public int StackCount { get => stackCount; }
+    public float Cooltime { get => cooltime; set => cooltime = value; }
 
+    public int[] DamageLevelTable;
+    public float[] CooltimeLevelTable;
+
+    public bool isFlatHit;
     bool isCooling;
 
     void Awake()
     {
-        playerJob = GameObject.Find("Player").GetComponent<PlayerJob>();
-        skill = SkillObj.GetComponent<Skill>(); 
-        
+        player = GameObject.Find("Player").transform;
+        skill = SkillObj.GetComponent<Skill>();
+
         level = 0;
-        StackCount = MaxStack;
+        stackCount = MaxStack;
+        cooltime = 0;
 
         isCooling = false;
-
-        // 스킬인 경우
-        if (UISprite && UIImage)
-        {
-            UIImage.sprite = UISprite;
-            UIImageCooltime = UIImage.transform.GetChild(0).GetComponent<Image>();
-            UIImageCooltime.sprite = UISprite;
-            UIStack = UIImage.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-            UIStack.text = StackCount.ToString();
-            UILevel = UIImage.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            UILevel.text = level.ToString();
-            UISkillpoint = UIImage.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-            UISkillpoint.text = playerJob.Skillpoint.ToString();
-        }
-        // 평타인 경우
-        else
-        {
-            level++;
-        }
+        if(isFlatHit) level++;
     }
 
     void FixedUpdate()
@@ -61,40 +41,32 @@ public class SkillController: MonoBehaviour
         {
             StartCoroutine(SetCooltime(skill.Cooltime));
         }
-        if (UIStack && UILevel)
-        {
-            UIStack.text = StackCount.ToString();
-            UILevel.text = level.ToString();
-            UISkillpoint.text = playerJob.Skillpoint.ToString();
-        }
     }
 
-    public void UseSKill(GameObject player)
+    public void UseSKill()
     {
         if (StackCount > 0)
         {
             skill=Instantiate(SkillObj).GetComponent<Skill>();
+            skill.player = player;
             skill.playerState = player.GetComponent<PlayerState>();
-            Debug.Log(level);
-            Debug.Log(skill.DamageLevelTable[level]);
-            skill.Damage = skill.DamageLevelTable[level];
-            skill.Cooltime = skill.CooltimeLevelTable[level];
+            skill.Damage = DamageLevelTable[level];
+            skill.Cooltime = CooltimeLevelTable[level];
 
-            StartCoroutine(skill.UseSkill(player));
-            StackCount--;
+            StartCoroutine(skill.UseSkill());
+            stackCount--;
         }
     }
-    public IEnumerator SetCooltime(float cooltime)
+    public IEnumerator SetCooltime(float MaxCooltime)
     {
         isCooling = true;
-        float Cool = 0;
-        while (Cool <= cooltime)
+        cooltime = 0;
+        while (cooltime <= MaxCooltime)
         {
-            Cool += Time.deltaTime;
-            if(UIImageCooltime) UIImageCooltime.fillAmount = Cool / cooltime;
+            cooltime += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
-        StackCount++;
+        stackCount++;
         isCooling = false;
     }
 }

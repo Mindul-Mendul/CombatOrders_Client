@@ -1,7 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
-
-public class JobAssassin: Job
+﻿public class JobAssassin: Job
 {
     JobAssassin()
     {

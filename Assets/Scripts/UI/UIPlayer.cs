@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Jobs;
 using UnityEngine;
-using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 public class UIPlayer : MonoBehaviour
 {
-    GameObject Canvas;
+    Transform Canvas;
     Transform Profile;
+
     PlayerLevel playerLevel;
     PlayerState playerState;
     PlayerJob playerJob;
@@ -27,6 +24,10 @@ public class UIPlayer : MonoBehaviour
     public GameObject[] Slot = new GameObject[10];
 
     Transform Skill;
+    Transform SkillQ;
+    Transform SkillW;
+    Transform SkillE;
+    Transform SkillR;
 
     Transform Stat;
     TextMeshProUGUI textLevel;
@@ -40,14 +41,14 @@ public class UIPlayer : MonoBehaviour
 
     void Awake()
     {
-        Canvas = transform.Find("Canvas").gameObject;
-        Profile = Canvas.transform.Find("Profile");
+        Canvas = transform.Find("Canvas");
+        Profile = Canvas.Find("Profile");
 
         playerLevel = GetComponent<PlayerLevel>();
         playerState = GetComponent<PlayerState>();
         playerJob = GetComponent<PlayerJob>();
 
-        MaxHPbar = Instantiate(prfHPbar, Canvas.transform).GetComponent<RectTransform>();
+        MaxHPbar = Instantiate(prfHPbar, Canvas).GetComponent<RectTransform>();
         HPbar = MaxHPbar.Find("HPbar").GetComponent<Image>();
 
         MaxEXPbar = Profile.Find("PlayerUI/EXPbar_bg");
@@ -56,8 +57,7 @@ public class UIPlayer : MonoBehaviour
         Inventory = Profile.Find("Inventory");
         for(int i=0; i<10; i++) Slot[i] = Inventory.transform.GetChild(i).gameObject;
 
-        Skill = Profile.transform.Find("UISkill");
-
+        //Stat
         Stat = Profile.transform.Find("Stat");
         textLevel = Stat.Find("TextLevel").GetComponent<TextMeshProUGUI>();
         textAtt = Stat.Find("LabelAtt/TextAtt").GetComponent<TextMeshProUGUI>();
@@ -68,6 +68,7 @@ public class UIPlayer : MonoBehaviour
 
         UIIllustration = GameObject.Find("Canvas/Profile/Illust").GetComponent<Image>();
 
+        UpdateBar();
         UpdateText();
     }
 
@@ -76,6 +77,7 @@ public class UIPlayer : MonoBehaviour
     {
         UpdateBar();
         UpdateText();
+        if(Skill) UpdateSkill();
         UIIllustration.sprite = playerJob.jobObject.GetComponent<Image>().sprite;
     }
 
@@ -96,5 +98,52 @@ public class UIPlayer : MonoBehaviour
         textMovSpd.text = playerState.Stat.MovSpd.ToString();
         textAttSpd.text = playerState.Stat.AttSpd.ToString();
         textMoney.text = playerState.Money.ToString();
+    }
+    public void UpdateJob()
+    {
+        //Skill
+        Skill = Profile.transform.Find("UISkill");
+
+        SkillQ = Skill.Find("UISkillQ");
+        SkillQ.GetComponent<Image>().sprite = playerJob.Q.SkillSprite;
+        SkillQ.GetChild(0).GetComponent<Image>().sprite = SkillQ.GetComponent<Image>().sprite;
+
+        SkillW = Skill.Find("UISkillW");
+        SkillW.GetComponent<Image>().sprite = playerJob.W.SkillSprite;
+        SkillW.GetChild(0).GetComponent<Image>().sprite = SkillW.GetComponent<Image>().sprite;
+
+        SkillE = Skill.Find("UISkillE");
+        SkillE.GetComponent<Image>().sprite = playerJob.E.SkillSprite;
+        SkillE.GetChild(0).GetComponent<Image>().sprite = SkillE.GetComponent<Image>().sprite;
+
+        SkillR = Skill.Find("UISkillR");
+        SkillR.GetComponent<Image>().sprite = playerJob.R.SkillSprite;
+        SkillR.GetChild(0).GetComponent<Image>().sprite = SkillR.GetComponent<Image>().sprite;
+    }
+    void UpdateSkill()
+    {
+        SkillController SkillQController = playerJob.Q;
+        SkillQ.GetChild(0).GetComponent<Image>().fillAmount = SkillQController.Cooltime / SkillQController.CooltimeLevelTable[SkillQController.Level];
+        SkillQ.GetChild(1).GetComponent<TextMeshProUGUI>().text = SkillQController.StackCount.ToString();
+        SkillQ.GetChild(2).GetComponent<TextMeshProUGUI>().text = SkillQController.Level.ToString();
+        SkillQ.GetChild(3).GetComponent<TextMeshProUGUI>().text = playerJob.Skillpoint.ToString();
+
+        SkillController SkillWController = playerJob.W;
+        SkillW.GetChild(0).GetComponent<Image>().fillAmount = SkillWController.Cooltime / SkillWController.SkillObj.GetComponent<Skill>().Cooltime;
+        SkillW.GetChild(1).GetComponent<TextMeshProUGUI>().text = SkillWController.StackCount.ToString();
+        SkillW.GetChild(2).GetComponent<TextMeshProUGUI>().text = SkillWController.Level.ToString();
+        SkillW.GetChild(3).GetComponent<TextMeshProUGUI>().text = playerJob.Skillpoint.ToString();
+
+        SkillController SkillEController = playerJob.E;
+        SkillE.GetChild(0).GetComponent<Image>().fillAmount = SkillEController.Cooltime / SkillEController.SkillObj.GetComponent<Skill>().Cooltime;
+        SkillE.GetChild(1).GetComponent<TextMeshProUGUI>().text = SkillEController.StackCount.ToString();
+        SkillE.GetChild(2).GetComponent<TextMeshProUGUI>().text = SkillEController.Level.ToString();
+        SkillE.GetChild(3).GetComponent<TextMeshProUGUI>().text = playerJob.Skillpoint.ToString();
+
+        SkillController SkillRController = playerJob.R;
+        SkillR.GetChild(0).GetComponent<Image>().fillAmount = SkillRController.Cooltime / SkillRController.SkillObj.GetComponent<Skill>().Cooltime;
+        SkillR.GetChild(1).GetComponent<TextMeshProUGUI>().text = SkillRController.StackCount.ToString();
+        SkillR.GetChild(2).GetComponent<TextMeshProUGUI>().text = SkillRController.Level.ToString();
+        SkillR.GetChild(3).GetComponent<TextMeshProUGUI>().text = playerJob.Skillpoint.ToString();
     }
 }

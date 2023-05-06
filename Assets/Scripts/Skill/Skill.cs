@@ -1,15 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
+    public Transform player;
     SpriteRenderer spriteRenderer;
     public int Damage;
     public float Cooltime;
-
-    public int[] DamageLevelTable;
-    public float[] CooltimeLevelTable;
 
     public PlayerState playerState;
     public float attackDuration; // 공격 지속 시간
@@ -21,7 +18,7 @@ public class Skill : MonoBehaviour
     }
 
     // Update is called once per frame
-    public virtual IEnumerator UseSkill(GameObject player)
+    public virtual IEnumerator UseSkill()
     {
         // 딜레이
         yield return new WaitForSeconds(attackDuration);

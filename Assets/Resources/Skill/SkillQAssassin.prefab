@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b06912d65bc59749a9f7a37e05ada17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   Damage: 0
   Cooltime: 0
   DamageLevelTable: 0000000064000000c80000002c01000090010000

@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6424243160796769924}
-  - component: {fileID: 6424243160796769927}
+  - component: {fileID: 4972937095756777659}
   m_Layer: 0
   m_Name: SkillControllerFlatHitAssassin
   m_TagString: Untagged
@@ -164,7 +164,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6424243160796769927
+--- !u!114 &4972937095756777659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,18 +173,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6424243160796769925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fc380e2185a18478334ebfe91d4e39, type: 3}
+  m_Script: {fileID: 11500000, guid: 410eb88b8b9f72145b2b208d23cc1b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIImage: {fileID: 0}
-  UIStack: {fileID: 0}
-  UILevel: {fileID: 0}
-  UISkillpoint: {fileID: 0}
-  UISprite: {fileID: 0}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  MaxStack: 0
-  StackCount: 0
+  SkillSprite: {fileID: 0}
+  MaxStack: 1
+  DamageLevelTable: 0a000000
+  CooltimeLevelTable:
+  - 0.5
+  isFlatHit: 1
 --- !u!1 &6424243161524389952
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6424243161524389955}
-  - component: {fileID: 6424243161524389954}
+  - component: {fileID: 2232023261965111278}
   m_Layer: 0
   m_Name: SkillControllerRAssassin
   m_TagString: Untagged
@@ -222,7 +221,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6424243161524389954
+--- !u!114 &2232023261965111278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,18 +230,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6424243161524389952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fc380e2185a18478334ebfe91d4e39, type: 3}
+  m_Script: {fileID: 11500000, guid: 13afb1e2c2940f64f8af349934f790a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIImage: {fileID: 0}
-  UIStack: {fileID: 0}
-  UILevel: {fileID: 0}
-  UISkillpoint: {fileID: 0}
-  UISprite: {fileID: 21300000, guid: 945bc97a66c2d674f85f145cf29f390a, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  MaxStack: 0
-  StackCount: 0
+  SkillSprite: {fileID: 21300000, guid: 945bc97a66c2d674f85f145cf29f390a, type: 3}
+  MaxStack: 1
+  DamageLevelTable: 0000000001000000030000000500000007000000
+  CooltimeLevelTable:
+  - 9999
+  - 7
+  - 5
+  - 3
+  - 1
+  isFlatHit: 0
 --- !u!1 &6424243161797071133
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6424243161797071132}
-  - component: {fileID: 6424243161797071135}
+  - component: {fileID: 1359530370949830531}
   m_Layer: 0
   m_Name: SkillControllerEAssassin
   m_TagString: Untagged
@@ -280,7 +282,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6424243161797071135
+--- !u!114 &1359530370949830531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,18 +291,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6424243161797071133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fc380e2185a18478334ebfe91d4e39, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ee552a82849c2445a7149dee756b435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIImage: {fileID: 0}
-  UIStack: {fileID: 0}
-  UILevel: {fileID: 0}
-  UISkillpoint: {fileID: 0}
-  UISprite: {fileID: 21300000, guid: 9707933b3bc877d498986a0dc7260c62, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  MaxStack: 0
-  StackCount: 0
+  SkillSprite: {fileID: 21300000, guid: 9707933b3bc877d498986a0dc7260c62, type: 3}
+  MaxStack: 2
+  DamageLevelTable: 0000000001000000030000000500000007000000
+  CooltimeLevelTable:
+  - 9999
+  - 7
+  - 5
+  - 3
+  - 1
+  isFlatHit: 0
 --- !u!1 &6424243161969557423
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6424243161969557422}
-  - component: {fileID: 6424243161969557409}
+  - component: {fileID: 969077506899222879}
   m_Layer: 0
   m_Name: SkillControllerQAssassin
   m_TagString: Untagged
@@ -338,7 +343,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6424243161969557409
+--- !u!114 &969077506899222879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,18 +352,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6424243161969557423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fc380e2185a18478334ebfe91d4e39, type: 3}
+  m_Script: {fileID: 11500000, guid: d4bef82872ef76747bb164a6116845ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIImage: {fileID: 0}
-  UIStack: {fileID: 0}
-  UILevel: {fileID: 0}
-  UISkillpoint: {fileID: 0}
-  UISprite: {fileID: 21300000, guid: c0e7c90fabb7f084bbbddbd82defbef5, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: 3b412b74fb43a614e87c8c4054a10e64,
     type: 3}
-  MaxStack: 0
-  StackCount: 0
+  SkillSprite: {fileID: 21300000, guid: c0e7c90fabb7f084bbbddbd82defbef5, type: 3}
+  MaxStack: 5
+  DamageLevelTable: 0000000001000000030000000500000007000000
+  CooltimeLevelTable:
+  - 9999
+  - 7
+  - 5
+  - 3
+  - 1
+  isFlatHit: 0
 --- !u!1 &6424243162011503873
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6424243162011503872}
-  - component: {fileID: 6424243162011503875}
+  - component: {fileID: 4693537012501933933}
   m_Layer: 0
   m_Name: SkillControllerWAssassin
   m_TagString: Untagged
@@ -396,7 +404,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6424243162011503875
+--- !u!114 &4693537012501933933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,15 +413,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6424243162011503873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fc380e2185a18478334ebfe91d4e39, type: 3}
+  m_Script: {fileID: 11500000, guid: d6e313138cd946f4f856d2b876f13934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIImage: {fileID: 0}
-  UIStack: {fileID: 0}
-  UILevel: {fileID: 0}
-  UISkillpoint: {fileID: 0}
-  UISprite: {fileID: 21300000, guid: a7fe6e3334afa2e4b90e2c773c376619, type: 3}
   SkillObj: {fileID: 5216351553472699361, guid: d4f720f23391f1f4fae14e824fbcb4d5,
     type: 3}
-  MaxStack: 0
-  StackCount: 0
+  SkillSprite: {fileID: 21300000, guid: a7fe6e3334afa2e4b90e2c773c376619, type: 3}
+  MaxStack: 3
+  DamageLevelTable: 0000000001000000030000000500000007000000
+  CooltimeLevelTable:
+  - 9999
+  - 7
+  - 5
+  - 3
+  - 1
+  isFlatHit: 0
