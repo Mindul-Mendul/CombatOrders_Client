@@ -8596,7 +8596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxSpeed: 4
   MaxVSpeed: 15
-  JumpPower: 10
+  JumpPower: 7
 --- !u!114 &496893430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9986,7 +9986,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f8312a99f3c08594f835b3ff9910724c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -11706,7 +11706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723666077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 588.5329, y: 288.90332, z: -6.3736267}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12582,7 +12582,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f8312a99f3c08594f835b3ff9910724c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -15283,7 +15283,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f8312a99f3c08594f835b3ff9910724c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -30267,7 +30267,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f8312a99f3c08594f835b3ff9910724c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -35967,7 +35967,7 @@ MonoBehaviour:
   Att: 0
   Def: 0
   MaxHP: 300
-  MovSpd: 4
+  MovSpd: 0.5
   AttSpd: 0
   Money: 800
 --- !u!1 &2111638548

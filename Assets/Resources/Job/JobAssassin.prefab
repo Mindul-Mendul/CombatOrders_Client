@@ -180,8 +180,9 @@ MonoBehaviour:
     type: 3}
   SkillSprite: {fileID: 0}
   MaxStack: 1
-  DamageLevelTable: 0a000000
+  DamageLevelTable: 0a0000000a000000
   CooltimeLevelTable:
+  - 0.5
   - 0.5
   isFlatHit: 1
 --- !u!1 &6424243161524389952
@@ -358,7 +359,7 @@ MonoBehaviour:
   SkillObj: {fileID: 5216351553472699361, guid: 3b412b74fb43a614e87c8c4054a10e64,
     type: 3}
   SkillSprite: {fileID: 21300000, guid: c0e7c90fabb7f084bbbddbd82defbef5, type: 3}
-  MaxStack: 5
+  MaxStack: 1
   DamageLevelTable: 0000000001000000030000000500000007000000
   CooltimeLevelTable:
   - 9999

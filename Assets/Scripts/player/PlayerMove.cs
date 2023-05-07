@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     bool chaos = false; // È¥¶õ
     bool faint = false; // ±âÀý
     bool slow = false; // µÐÈ­
-    bool hide = true; // Àº½Å
+    bool hide = false; // Àº½Å
 
     public bool Chaos { get => chaos; set => chaos = value; }
     public bool Faint { get => faint; set => faint = value; }
@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
 
     public float MaxSpeed = 4f;
     public float MaxVSpeed = 15f;
-    public float JumpPower = 10f;
+    public float JumpPower = 7f;
 
     PlayerState playerState;
 
@@ -52,18 +52,17 @@ public class PlayerMove : MonoBehaviour
         if(!faint && Input.GetButtonDown("Jump") ) //&& !state.GetAnimBool("isJumping")
         {
             RaycastHit2D hitBottom = Physics2D.Raycast(rigid.transform.position, Vector2.down, 0.7f, GroundMask);
-            if ((!chaos && Input.GetKey(KeyCode.DownArrow)) || (chaos && !Input.GetKey(KeyCode.DownArrow)))
+            if (chaos != Input.GetKey(KeyCode.DownArrow))
             {
-                // ¹Ù´Ú ¶Õ±â ¹æÁö¿ë ÄÚµå
-                if (hitBottom.collider && hitBottom.collider.name != "GroundM")
+                if (hitBottom.collider && (hitBottom.collider.name != "GroundM"))
                 {
-                    rigid.AddForce(Vector2.down * JumpPower / 3, ForceMode2D.Impulse);
+                    rigid.AddForce(Vector2.down * JumpPower / 3 * rigid.mass, ForceMode2D.Impulse);
                     animator.SetBool("isJumping", true);
                 }
             }
             else
             {
-                rigid.AddForce(Vector2.up * JumpPower, ForceMode2D.Impulse);
+                rigid.AddForce(Vector2.up * JumpPower * rigid.mass, ForceMode2D.Impulse);
                 animator.SetBool("isJumping", true);
             }
         }
@@ -73,28 +72,30 @@ public class PlayerMove : MonoBehaviour
         // flip Sprite
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            spriteRenderer.flipX = (!chaos && Input.GetAxisRaw("Horizontal") == -1) || (chaos && Input.GetAxisRaw("Horizontal") == 1);
+            spriteRenderer.flipX = (chaos != (Input.GetAxisRaw("Horizontal") == -1));
         }
 
-        if (hide) spriteRenderer.color = new Color(1, 1, 1, 0.3f);
+        spriteRenderer.color = new Color(1, 1, 1, hide ? 0.3f : 1f);
     }
 
     void FixedUpdate()
     {
         //Move By key control
         float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(2 * h * (chaos ? Vector2.left : Vector2.right), ForceMode2D.Impulse);
+        rigid.AddForce(3 * MaxSpeed * h * (chaos ? Vector2.left : Vector2.right), ForceMode2D.Impulse);
 
         // Max Speed
         float hspd = faint ? 0 : (slow ? MaxSpeed/4 : MaxSpeed);
         if (rigid.velocity.x > hspd) rigid.velocity = new Vector2(hspd, rigid.velocity.y);
         else if(rigid.velocity.x < -hspd) rigid.velocity = new Vector2(-hspd, rigid.velocity.y);
-        if (rigid.velocity.y > MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, MaxVSpeed);
-        else if (rigid.velocity.y < -MaxVSpeed) rigid.velocity = new Vector2(rigid.velocity.x, -MaxVSpeed);
+        if (rigid.velocity.y > MaxVSpeed * rigid.mass) rigid.velocity = new Vector2(rigid.velocity.x, MaxVSpeed * rigid.mass);
+        else if (rigid.velocity.y < -MaxVSpeed * rigid.mass) rigid.velocity = new Vector2(rigid.velocity.x, -MaxVSpeed * rigid.mass);
 
         //isJumping
         if (!animator.GetBool("isJumping")) rigid.gravityScale = 0;
         else rigid.gravityScale = 1;
+
+        Debug.Log(rigid.velocity.y);
     }
 
     void OnTriggerEnter2D(Collider2D other)

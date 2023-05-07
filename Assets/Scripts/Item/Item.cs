@@ -9,8 +9,8 @@ public class Item: MonoBehaviour
     public int Att;
     public int Def;
     public int MaxHP;
-    public int MovSpd;
-    public int AttSpd;
+    public float MovSpd;
+    public float AttSpd;
     public int Money;
 
     void Awake()

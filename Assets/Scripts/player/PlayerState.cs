@@ -38,8 +38,6 @@ public class PlayerState : MonoBehaviour
 
     private void Update()
     {
-        
-
         //Level up
         playerLevel.Levelup();
     }
